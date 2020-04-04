@@ -1,0 +1,255 @@
+/*!
+ * LESS version of the stylesheet for design kmom06 designelement.
+ *
+ * This stylesheet is for the design course and kmom06 designelement.
+ */
+
+/**
+* Normalize and reset the style.
+*/
+@import "normalize.css/normalize.less";
+
+
+/**
+ * Font Awesome.
+ */
+@import "@fortawesome/fontawesome-free/less/fontawesome.less";
+@import "@fortawesome/fontawesome-free/less/solid.less";
+@import "@fortawesome/fontawesome-free/less/brands.less";
+
+/**
+ * A responsive menu.
+ */
+@import "@desinax/responsive-menu/less/responsive-menu.less";
+@import "@desinax/responsive-menu/less/media-queries.less";
+
+/**
+ * My own settings, not currently in their own module.
+ */
+
+/**
+* Import the typographic grid.
+*/
+@import "@desinax/typographic-grid/less/typography-font-families.less";
+@import "@desinax/typographic-grid/less/typography-defaults.less";
+
+/**
+ * Figure and figcaption for images and other media using figure/figcaption
+ */
+@import "@desinax/figure/less/asciinema.less";
+@import "@desinax/figure/less/codepen.less";
+@import "@desinax/figure/less/figure.less";
+
+/**
+* Base style to affect HTML elements on a general scale.
+*/
+@import "base/base_kmom01.less";
+
+/**
+* Import the vertical grid.
+*/
+@import "@desinax/vertical-grid/less/grid.less";
+@import "layout/grids_kmom01.less";
+
+ /**
+  * Layout style for general structure of header, navbar, main, footer
+  * and other regions of the page including route specific styles.
+  */
+@import "layout/layout_kmom01.less";
+@import "layout/responsive_kmom01.less";
+
+// Colors
+
+
+// Color scheme
+@minWhite: #fff;
+@minLighestGray: #fafafa;
+@minLightGray: #d3dfe3;
+@minMidGray: #4a5559;
+@minDarkGray: #333;
+@minGreen: #31666f;
+@minGreenLink: #2e5860;
+@minGreenLinkLight: #bdcbce;
+@transparentWhite: rgba(255, 255, 255, 0.95);
+@orange: #f9ac3b;
+@lighestBlue: #f1f5f6;
+
+// Colors
+@bgColorHtml: @minMidGray;
+@bgColorBody: @minWhite;
+@bgColorFooter: @minMidGray;
+@bgColorSidebar: @minLightGray;
+@bgColorMenu: @minDarkGray;
+@bgColorMain: @minLighestGray;
+@bgColorWrapAll: @minLighestGray;
+@colorBody: @minDarkGray;
+@textColorHeadings: @minDarkGray;
+@linkColorText: @minGreenLink;
+@linkColor: @minDarkGray;
+@linkHoverToc: @minLighestGray;
+@innerWrapColor: @minWhite;
+@maxButtonColor:            @minWhite;
+
+@textColor: @minDarkGray;
+@textColorFooter: @minWhite;
+@linkColorMenu: @minWhite;
+@textColorLogo: @minWhite;
+@linkColorToc: @minDarkGray;
+
+
+// Font-families
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro:300|Raleway&display=swap');
+
+@fontFamilySourceSans:         "Source Sans Pro", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+@fontFamilyRaleway:           Raleway, Arial, "Helvetica Neue", Helvetica, sans-serif;
+
+@fontFamilyHeadings: @fontFamilySourceSans;
+@fontFamilyBody:     @fontFamilySourceSans;
+@fontFamilyHeader: @fontFamilyRaleway;
+@fontFamilyLogo: @fontFamilySourceSans;
+
+// Font-sizes
+@magicNumber:  24px;
+@fontSizeBody: 16px;
+
+
+
+.outer-wrap-main,
+.outer-wrap-breadcrumb,
+.outer-wrap-flash-message {
+    background-color: transparent;
+}
+
+.region-flash {
+    display: none;
+}
+
+.region-main {
+    margin-top: 24px;
+}
+
+.region-main.has-sidebar {
+    margin-top: 0;
+}
+
+.region-breadcrumb {
+    margin-top: 24px;
+}
+
+.site-logo-text {
+    text-transform: uppercase;
+    font-style: normal;
+}
+
+.rm-default .selected a,
+.rm-default .selected-parent a {
+    color: @orange;
+}
+
+.site-logo-text {
+    color: @minGreenLinkLight;
+}
+
+h1 {
+    text-transform: uppercase;
+}
+
+.toc .selected {
+    border-left: 6px solid @orange;
+
+    & a {
+        padding-left: 18px;
+    }
+}
+
+.toc li:hover {
+    border-left: 6px solid @orange;
+
+    & a {
+        padding-left: 18px;
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    border-bottom: 1px solid #666;
+}
+
+a {
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.footer-column {
+
+    & h4 {
+    border-bottom: 1px solid #fff;
+    }
+
+    & a {
+        text-decoration: underline;
+    }
+}
+
+.inner-wrap-main,
+.inner-wrap-breadcrumb,
+.inner-wrap-flash-message {
+    background-color: @transparentWhite;
+}
+
+.author-byline {
+    border: 1px solid #666;
+}
+
+.inner-wrap-main,
+.inner-wrap-sidebar {
+
+}
+
+figure {
+
+    &.figure.left {
+        margin-right: @magicNumber;
+    }
+
+    &.figure.right {
+        margin-left: @magicNumber;
+    }
+
+    &.border {
+        padding: @magicNumber;
+        outline: 1px dashed #666;
+        background-color: @lighestBlue;
+    }
+
+    &.border figcaption {
+        padding-left: 24px;
+        background-color: @lighestBlue;
+    }
+
+    & img {
+        opacity: 0.9;
+    }
+}
+
+.byline-image img {
+    opacity: 0.9;
+}
+
+.author-byline {
+    background-color: @lighestBlue;
+}
+
+.region-flash-message {
+    background-color: #f1f5f6;
+    border: 1px solid #666;
+    margin-top: @magicNumber;
+    padding: @magicNumber;
+}

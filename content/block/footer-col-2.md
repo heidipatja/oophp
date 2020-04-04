@@ -1,3 +1,6 @@
-#### Footer col 2
+#### Länkar
 
-Med brödtext i ett stycke som säger något trevligt om just detta block, eller kanske en lista av länkar.
+Läs mer om utbildningen och kursen.
+
+[Webbprogrammering på BTH](https://www.bth.se/utbildning/program/pagwg/)  
+[Kursen oophp](https://dbwebb.se/kurser/oophp-v5)  

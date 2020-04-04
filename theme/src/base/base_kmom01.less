@@ -1,0 +1,55 @@
+// /**
+//  * Base style to affect HTML elements on a general scale.
+//  */
+
+/* Base rules */
+
+* {
+    box-sizing: border-box;
+}
+
+/**
+* My own settings
+*/
+
+@colorTypographyMark: @textColor;
+@textColor: #333;
+
+.bgColorBody(@bgColorBody: #fff) {
+    background-color: @bgColorBody;
+}
+
+html {
+    overflow-y: scroll;
+    background-color: @bgColorHtml;
+    font-size: 100%;
+}
+
+body {
+    #desinax-hgrid.font(@fontSizeBody);
+    color: @textColor;
+    background-color: @bgColorBody;
+}
+
+h1 {
+    color: @textColorHeadings;
+}
+
+p {
+    color: @textColor;
+}
+
+a {
+    color: @linkColorText;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+h1 a {
+    text-decoration: none;
+}
+
+// Activate grid and affect all typographic elements
+#desinax-hgrid.activateDefaultTypography();

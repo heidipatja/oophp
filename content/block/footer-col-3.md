@@ -1,3 +1,3 @@
-#### Footer col 3
+#### Om sidan
 
-Med brödtext i ett stycke som säger något trevligt om just detta block, eller kanske en lista av länkar.
+Denna webbplats har skapats som en del av kursen *Objektorienterade webbteknologier* vid Blekinge Tekniska Högskola.

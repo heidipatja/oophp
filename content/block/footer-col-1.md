@@ -1,3 +1,5 @@
-#### Footer col 1
+#### Kontakta mig
 
-Med brödtext i ett stycke som säger något trevligt om just detta block, eller kanske en lista av länkar.
+Har du frågor eller synpunkter? Skicka ett meddelande.
+
+[hepa19@student.bth.se](mailto:hepa19@student.bth.se)
