@@ -4,8 +4,11 @@ Me page for the course oophp at BTH.
 
 ### Versions
 
+#### First commit
+Copied and uploaded base from [dbwebb](https://github.com/dbwebb-se/oophp)
+
 #### v1.0.0
-Base for me page done. Style, general structure, presentation and images.
+Style, general structure, presentation and images done.
 
 ---
 Heidi Patja
