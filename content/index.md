@@ -1,7 +1,7 @@
 ---
 title: "Min fina titel"
 ---
-Me-sida för Heidi Patja
+Me-sida för Heidi
 =========================
 
 [FIGURE src="image/sunset.jpg?w=400&cf&sharpen&f=contrast,-5&f2=colorize,0,10,25,0" class="left w50" caption="Heidi i Jämtlandsfjällen."]

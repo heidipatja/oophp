@@ -3,4 +3,6 @@
 Redovisningstexter
 =========================
 
-Detta innehåll är skrivet i markdown och du hittar innehållet i filen `content/redovisning/00_index.md`.
+Här hittar du redovisningstexter till kursen *Objektorienterade webbteknologier*.
+
+Poppa lite popcorn och let's go!
