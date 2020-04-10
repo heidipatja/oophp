@@ -5,7 +5,7 @@
 return [
     // Use for styling the menu
     "class" => "my-navbar",
- 
+
     // Here comes the menu items/structure
     "items" => [
         [
@@ -27,6 +27,11 @@ return [
             "text" => "Styleväljare",
             "url" => "style",
             "title" => "Välj stylesheet.",
+        ],
+        [
+            "text" => "Spel",
+            "url" => "spel",
+            "title" => "Spela spel",
         ],
         [
             "text" => "Verktyg",

@@ -70,6 +70,11 @@ return [
             "title" => "Välj stylesheet.",
         ],
         [
+            "text" => "Spel",
+            "url" => "spel",
+            "title" => "Spela spel",
+        ],
+        [
             "text" => "Docs",
             "url" => "dokumentation",
             "title" => "Dokumentation av ramverk och liknande.",
