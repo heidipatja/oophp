@@ -19,6 +19,9 @@ Integrated Guess My Number game into framework
 #### v2.0.1
 Fixed tag...
 
+#### v2.0.2
+Added style and fixes to guess game
+
 =======
 
 Heidi Patja
