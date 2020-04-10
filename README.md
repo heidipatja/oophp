@@ -22,6 +22,9 @@ Fixed tag...
 #### v2.0.2
 Added style and fixes to guess game
 
+#### v2.0.3
+Final touches and report for kmom02 done
+
 =======
 
 Heidi Patja

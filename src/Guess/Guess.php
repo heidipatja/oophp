@@ -1,9 +1,12 @@
 <?php
+/**
+ * Guess my number, a class supporting the game through GET, POST and SESSION.
+ */
 
 namespace Hepa19\Guess;
 
 /**
- * Guess my number, a class supporting the game through GET, POST and SESSION.
+ * Guess
  */
 class Guess
 {
@@ -11,7 +14,6 @@ class Guess
      * @var int $number   The current secret number.
      * @var int $tries    Number of tries a guess has been made.
      */
-
     private $number;
     private $tries;
 
@@ -19,10 +21,9 @@ class Guess
      * Constructor to initiate the object with current game settings,
      * if available. Randomize the current number if no value is sent in.
      *
-     * @param int $number The current secret number, default -1 to initiate
-     *                    the number from start.
-     * @param int $tries  Number of tries a guess has been made,
-     *                    default 6.
+     * @param null|int $number The current secret number, default -1 to initiate the number from start.
+     *
+     * @param null|int $tries  Number of tries, default 6.
      */
 
     public function __construct(int $number = -1, int $tries = 6)
@@ -86,6 +87,7 @@ class Guess
      *
      * @throws GuessException when guessed number is out of bounds.
      *
+     * @param int $number The current secret number
      * @return string to show the status of the guess made.
      */
 

@@ -70,7 +70,7 @@ return [
         ],
         [
             "text" => "Spel",
-            "url" => "spel",
+            "url" => "guess",
             "title" => "Spela spel",
         ],
         [
