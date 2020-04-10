@@ -26,7 +26,7 @@ $app->router->get("guess/play", function () use ($app) {
 
     $data = [
         "guess" => $_SESSION["guess"] ?? null,
-        "res" => $_SESSION["guess"] ?? null,
+        "res" => $_SESSION["res"] ?? null,
         "tries" => $_SESSION["tries"] ?? null,
         "number" => $_SESSION["number"] ?? null
     ];
@@ -34,7 +34,7 @@ $app->router->get("guess/play", function () use ($app) {
     $_SESSION["res"] = null;
 
     $app->page->add("guess/play", $data);
-    $app->page->add("guess/debug");
+    // $app->page->add("guess/debug");
 
     return $app->page->render([
         "title" => $title,

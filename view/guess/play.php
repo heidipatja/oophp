@@ -9,9 +9,9 @@ namespace Anax\View;
 
 ?><h1>Gissa mitt nummer</h1>
 
-<p>Gissa på ett nummer mellan 1 och 100.</p>
+<p class="guess">Gissa på ett nummer mellan 1 och 100.</p>
 
-<p>Du har <?= $tries ?> försök kvar.</p>
+<p class="guess">Du har <?= $tries ?> försök kvar.</p>
 
 <?php if ($res) : ?>
     <p class="result"><?= $res ?></p>

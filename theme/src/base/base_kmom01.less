@@ -23,16 +23,19 @@ html {
     overflow-y: scroll;
     background-color: @bgColorHtml;
     font-size: 100%;
+    font-weight: 300;
 }
 
 body {
     #desinax-hgrid.font(@fontSizeBody);
     color: @textColor;
     background-color: @bgColorBody;
+    font-weight: 300;
 }
 
 h1 {
     color: @textColorHeadings;
+    font-weight: 300;
 }
 
 p {
@@ -49,6 +52,27 @@ a {
 
 h1 a {
     text-decoration: none;
+}
+
+input {
+    padding: 0;
+}
+
+input[type=text],
+input[type=number] {
+    width: 10em;
+    height: @magicNumber * 1.5;
+    border: 1px solid @minMidGray;
+}
+
+input[type=submit] {
+    font-size: 1em;
+    border: 1px solid @minMidGray;
+    padding: 0 2em;
+    height: @magicNumber * 1.5;
+    text-decoration: none;
+    margin: 1em 0;
+    background-color: @minLightGray;
 }
 
 // Activate grid and affect all typographic elements

@@ -98,7 +98,7 @@
 
 
 // Font-families
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300|Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway&family=Source+Sans+Pro:wght@300;400;600&display=swap');
 
 
 @fontFamilySourceSans:         "Source Sans Pro", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -181,6 +181,7 @@ h4,
 h5,
 h6 {
     border-bottom: 1px solid #666;
+    font-weight: 300;
 }
 
 a {
@@ -256,4 +257,15 @@ figure {
     border: 1px solid #666;
     margin-top: @magicNumber;
     padding: @magicNumber;
+}
+
+.result {
+    font-weight: 400;
+    padding: 1rem;
+    border: 1px solid #f9ac3b;
+    max-width: 503px;
+}
+
+.guess {
+    font-weight: 400;
 }

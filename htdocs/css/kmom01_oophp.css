@@ -5036,14 +5036,17 @@ html {
   overflow-y: scroll;
   background-color: #4a5559;
   font-size: 100%;
+  font-weight: 300;
 }
 body {
   font: 16px/1.5 "Source Sans Pro", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #333;
   background-color: #fff;
+  font-weight: 300;
 }
 h1 {
   color: #333;
+  font-weight: 300;
 }
 p {
   color: #333;
@@ -5056,6 +5059,24 @@ a:hover {
 }
 h1 a {
   text-decoration: none;
+}
+input {
+  padding: 0;
+}
+input[type=text],
+input[type=number] {
+  width: 10em;
+  height: 36px;
+  border: 1px solid #4a5559;
+}
+input[type=submit] {
+  font-size: 1em;
+  border: 1px solid #4a5559;
+  padding: 0 2em;
+  height: 36px;
+  text-decoration: none;
+  margin: 1em 0;
+  background-color: #d3dfe3;
 }
 h1,
 h2,
@@ -6059,14 +6080,28 @@ article ol {
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: local('Raleway'), local('Raleway-Regular'), url(https://fonts.gstatic.com/s/raleway/v14/1Ptug8zYS_SKggPNyC0ISg.ttf) format('truetype');
+  src: local('Raleway'), local('Raleway-Regular'), url(https://fonts.gstatic.com/s/raleway/v14/1Ptug8zYS_SKggPN-Co.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 300;
   font-display: swap;
-  src: local('Source Sans Pro Light'), local('SourceSansPro-Light'), url(https://fonts.gstatic.com/s/sourcesanspro/v13/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdr.ttf) format('truetype');
+  src: local('Source Sans Pro Light'), local('SourceSansPro-Light'), url(https://fonts.gstatic.com/s/sourcesanspro/v13/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zAkA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Source Sans Pro Regular'), local('SourceSansPro-Regular'), url(https://fonts.gstatic.com/s/sourcesanspro/v13/6xK3dSBYKcSV-LCoeQqfX1RYOo3aPw.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Source Sans Pro SemiBold'), local('SourceSansPro-SemiBold'), url(https://fonts.gstatic.com/s/sourcesanspro/v13/6xKydSBYKcSV-LCoeQqfX1RYOo3i54rAkA.ttf) format('truetype');
 }
 article a {
   text-decoration: underline;
@@ -6121,6 +6156,7 @@ h4,
 h5,
 h6 {
   border-bottom: 1px solid #666;
+  font-weight: 300;
 }
 a {
   text-decoration: none;
@@ -6171,4 +6207,13 @@ figure img {
   border: 1px solid #666;
   margin-top: 24px;
   padding: 24px;
+}
+.result {
+  font-weight: 400;
+  padding: 1rem;
+  border: 1px solid #f9ac3b;
+  max-width: 503px;
+}
+.guess {
+  font-weight: 400;
 }

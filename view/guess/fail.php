@@ -9,9 +9,9 @@ namespace Anax\View;
 
 ?><h1>Gissa mitt nummer</h1>
 
-<p>Ajdå! Du har <?= $tries ?> gissningar kvar.</p>
+<p class="guess">Ajdå! Du har <?= $tries ?> gissningar kvar.</p>
 
-<p>Rätt svar var <?= $number ?>.</p>
+<p class="guess">Rätt svar var <?= $number ?>.</p>
 
 <form method="post" action="play">
     <input type="hidden" name="guess" autofocus>
