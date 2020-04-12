@@ -8,20 +8,20 @@
 /**
  * Init the guess game, redirect to play
  */
-$app->router->get("guess/init", function () use ($app) {
+$app->router->get("spel/guess/init", function () use ($app) {
     $_SESSION["res"] = null;
     $game = new Hepa19\Guess\Guess();
     $_SESSION["number"] = $game->number();
     $_SESSION["tries"] = $game->tries();
 
-    return $app->response->redirect("guess/play");
+    return $app->response->redirect("spel/guess/play");
 });
 
 
 /**
  * Show game status
  */
-$app->router->get("guess/play", function () use ($app) {
+$app->router->get("spel/guess/play", function () use ($app) {
     $title = "Gissa mitt nummer";
 
     $data = [
@@ -33,8 +33,8 @@ $app->router->get("guess/play", function () use ($app) {
 
     $_SESSION["res"] = null;
 
-    $app->page->add("guess/play", $data);
-    // $app->page->add("guess/debug");
+    $app->page->add("spel/guess/play", $data);
+    // $app->page->add("spel/guess/debug");
 
     return $app->page->render([
         "title" => $title,
@@ -45,7 +45,7 @@ $app->router->get("guess/play", function () use ($app) {
 /**
  * Choosing a route based on POST info
  */
-$app->router->post("guess/play", function () use ($app) {
+$app->router->post("spel/guess/play", function () use ($app) {
     $number = $_SESSION["number"] ?? null;
     $tries = $_SESSION["tries"] ?? null;
     $guess = $_POST["guess"] ?? null;
@@ -55,15 +55,15 @@ $app->router->post("guess/play", function () use ($app) {
     $res = null;
 
     if ($_POST["doInit"]) {
-        return $app->response->redirect("guess/init");
+        return $app->response->redirect("spel/guess/init");
     } else if ($doGuess) {
         $_SESSION["guess"] = $guess;
-        return $app->response->redirect("guess/make-guess");
+        return $app->response->redirect("spel/guess/make-guess");
     } else if ($doCheat) {
         $_SESSION["res"] = "Pssst! Numret är " . $number . "... ";
-        return $app->response->redirect("guess/play");
+        return $app->response->redirect("spel/guess/play");
     } else {
-        return $app->response->redirect("guess/init");
+        return $app->response->redirect("spel/guess/init");
     }
 });
 
@@ -71,7 +71,7 @@ $app->router->post("guess/play", function () use ($app) {
 /**
  * Make a guess
  */
-$app->router->get("guess/make-guess", function () use ($app) {
+$app->router->get("spel/guess/make-guess", function () use ($app) {
     $guess = $_SESSION["guess"] ?? null;
     $number = $_SESSION["number"] ?? null;
     $tries = $_SESSION["tries"] ?? null;
@@ -90,11 +90,11 @@ $app->router->get("guess/make-guess", function () use ($app) {
     $_SESSION["res"] = $res;
 
     if ($res == "Rätt!") {
-        return $app->response->redirect("guess/win");
+        return $app->response->redirect("spel/guess/win");
     } else if ($_SESSION["tries"] < 1) {
-        return $app->response->redirect("guess/fail");
+        return $app->response->redirect("spel/guess/fail");
     } else {
-        return $app->response->redirect("guess/play");
+        return $app->response->redirect("spel/guess/play");
     }
 });
 
@@ -102,7 +102,7 @@ $app->router->get("guess/make-guess", function () use ($app) {
 /**
  * Won game, guessed correctly
  */
-$app->router->get("guess/win", function () use ($app) {
+$app->router->get("spel/guess/win", function () use ($app) {
     $title = "Gissa mitt nummer - Du vann!";
 
     $data = [
@@ -110,7 +110,7 @@ $app->router->get("guess/win", function () use ($app) {
         "number" => $_SESSION["number"] ?? null
     ];
 
-    $app->page->add("guess/win", $data);
+    $app->page->add("spel/guess/win", $data);
 
     return $app->page->render([
         "title" => $title,
@@ -121,7 +121,7 @@ $app->router->get("guess/win", function () use ($app) {
 /**
  * Lost game, no tries left
  */
-$app->router->get("guess/fail", function () use ($app) {
+$app->router->get("spel/guess/fail", function () use ($app) {
     $title = "Gissa mitt nummer - Du förlorade!";
 
     $data = [
@@ -129,7 +129,7 @@ $app->router->get("guess/fail", function () use ($app) {
         "number" => $_SESSION["number"] ?? null
     ];
 
-    $app->page->add("guess/fail", $data);
+    $app->page->add("spel/guess/fail", $data);
 
     return $app->page->render([
         "title" => $title,

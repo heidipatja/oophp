@@ -71,8 +71,22 @@ return [
         ],
         [
             "text" => "Spel",
-            "url" => "guess",
+            "url" => "spel",
             "title" => "Spela spel",
+            "submenu" => [
+                "items" => [
+                    [
+                        "text" => "Gissa",
+                        "url" => "spel/guess/play",
+                        "title" => "Gissa mitt nummer",
+                    ],
+                    [
+                        "text" => "Tärning",
+                        "url" => "spel/dice/play",
+                        "title" => "Tärningsspelet 100",
+                    ],
+                ],
+            ],
         ],
         [
             "text" => "Docs",
