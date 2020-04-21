@@ -16,9 +16,9 @@ namespace Anax\View;
         <label for "name">Namn:</label>
         <input type="text" name="name" required autofocus>
         <label for "dices">Antal tärningar:</label>
-        <input type="number" name="dices" min=1 max=5 value=3>
+        <input type="number" name="dices" min=1 max=5 value=3 required>
         <label for "players">Antar motståndare:</label>
-        <input type="number" name="players" min=1 max=5 value=2>
+        <input type="number" name="players" min=1 max=5 value=2 required>
         <input type="submit" name="start" class="start" value="Starta spelet">
     </form>
 
