@@ -1,0 +1,89 @@
+
+/**
+ * CSS sprite for a dice with six faces.
+ * For dice game
+ */
+
+.dice-graphics {
+    margin-bottom: 12px;
+}
+
+.dice-sprite {
+    display: inline-block;
+    padding: 0;
+    margin: 0 18px 0 0;
+    width: 32px;
+    height: 32px;
+    background: url(../../view/spel/dice/img/dice-faces.jpg) no-repeat;
+}
+
+.dice-sprite.dice-1 { background-position: -160px 0; }
+.dice-sprite.dice-2 { background-position: -128px 0; }
+.dice-sprite.dice-3 { background-position: -96px 0; }
+.dice-sprite.dice-4 { background-position: -64px 0; }
+.dice-sprite.dice-5 { background-position: -32px 0; }
+.dice-sprite.dice-6 { background-position: 0 0; }
+
+.init-form label,
+.init-form input {
+    display: block;
+}
+
+.score-board,
+.init {
+    background-color: #eee;
+    padding: 12px 24px;
+    float: left;
+    width: 30%;
+    min-height: 364px;
+    margin-bottom: 24px;
+
+    & h2 {
+        border-bottom: none;
+    }
+}
+
+.round,
+.rules {
+    float: left;
+    padding: 12px 24px 12px 48px;
+    width: 65%;
+
+    & h2 {
+        border-bottom: none;
+    }
+}
+
+.end {
+    clear: both;
+}
+
+.action {
+    font-weight: 400;
+    color: #0b3e3c;
+}
+
+.stats {
+
+    & p {
+        margin-bottom: 0;
+        margin-top: @magicNumber / 2;
+
+        &:last-of-type {
+            margin-bottom: @magicNumber;
+        }
+    }
+}
+
+input.roll {
+    background-color: #ffd8a0;
+}
+
+input.save {
+    background-color: #c0dec0;
+}
+
+input.start {
+    background-color: #c0dec0;
+    margin-top: 24px;
+}

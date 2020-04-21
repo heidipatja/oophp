@@ -54,15 +54,24 @@ h1 a {
     text-decoration: none;
 }
 
+label {
+    margin-bottom: 0.2rem;
+}
+
 input {
-    padding: 0;
+    padding: 0.3rem;
+    height: @magicNumber * 1.5;
+    border: 1px solid @minMidGray;
+    margin-bottom: @magicNumber / 2;
 }
 
 input[type=text],
 input[type=number] {
     width: 10em;
-    height: @magicNumber * 1.5;
-    border: 1px solid @minMidGray;
+}
+
+input[type=number] {
+    width: 5em;
 }
 
 input[type=submit] {
@@ -71,7 +80,7 @@ input[type=submit] {
     padding: 0 2em;
     height: @magicNumber * 1.5;
     text-decoration: none;
-    margin: 1em 0;
+    margin: 1em 0.5em 1em 0;
     background-color: @minLightGray;
 }
 

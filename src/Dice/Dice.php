@@ -12,7 +12,7 @@ class Dice
     /**
      *
      * @var int $sides    Number of sides of dice
-     * @var int $lastRoll    Last roll
+     * @var int $value    Last roll
      */
     private $sides;
     private $value;
@@ -22,7 +22,7 @@ class Dice
     /**
      * Constructor to create a Dice
      *
-     * @param int    $sides   Number of sides the dice has
+     * @param int    $sides   Number of sides the dice has, defaults to 6
      */
 
     public function __construct(int $sides = 6)
@@ -33,7 +33,7 @@ class Dice
 
 
     /**
-     * Randomize dice value (roll dice)
+     * Randomize dice value to value between 1 and number of sides (roll dice)
      *
      * @return void
      */

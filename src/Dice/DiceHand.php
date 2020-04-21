@@ -5,46 +5,58 @@
  namespace Hepa19\Dice;
 
  /**
- * A dicehand, consisting of dices.
+ * A dicehand, hand consisting of a number of dices.
  */
 class DiceHand
 {
     /**
-     * @var Dice $dices   Array consisting of dices.
-     * @var int  $values  Array consisting of last roll of the dices.
+     * @var array $dices   Array consisting of dices.
+     * @var array  $values  Array consisting of values for last roll of dices.
+     * @var array  $graphic  Array with class names to build graphics for roll
      */
 
     private $dices;
     private $values;
+    private $graphic;
 
     /**
-     * Constructor to initiate the dicehand with a number of dices.
+     * Constructor to initiate the dice hand with a number of dices.
      *
-     * @param int $dices Number of dices to create, defaults to five.
+     * @param int $dices   Number of dices to create, per hand, defaults to two.
+     * @param array $values   Values of dices in hand
+     * @param array $graphic   Class names of dices in hand to build graphics
      */
 
-    public function __construct(int $dices = 5)
+    public function __construct(int $dices = 2)
     {
         $this->dices  = [];
         $this->values = [];
+        $this->graphic = [];
 
         for ($i = 0; $i < $dices; $i++) {
-            $this->dices[]  = new Dice();
+            $this->dices[] = new DiceGraphic();
         }
     }
 
 
 
     /**
-     * Roll all dices save their value.
+     * Roll all dices save their value to array
+     * @param int $dices   Number of dices to create, per hand, defaults to two.
+     * @param array $values   Values of dices in hand
+     * @param array $graphic   Class names of dices in hand to build graphics
      *
      * @return void.
      */
 
     public function roll()
     {
-        for ($i = 0; $i < count($this->dices); $i++) {
-            array_push($this->values, $this->dices[$i]->roll());
+        $this->graphic = [];
+        $this->values = [];
+        $noOfDices = count($this->dices);
+        for ($i = 0; $i < $noOfDices; $i++) {
+            $this->values[] = $this->dices[$i]->roll();
+            $this->graphic[] = $this->dices[$i]->graphic();
         }
     }
 
@@ -56,7 +68,7 @@ class DiceHand
      * @return array with values of the last roll.
      */
 
-    public function values()
+    public function getValues()
     {
         return $this->values;
     }
@@ -69,7 +81,7 @@ class DiceHand
      * @return int as the sum of all dices.
      */
 
-    public function sum()
+    public function getSum()
     {
         return array_sum($this->values);
     }
@@ -82,8 +94,21 @@ class DiceHand
      * @return float as the average of all dices.
      */
 
-    public function average()
+    public function getAverage()
     {
         return (array_sum($this->values) / count($this->dices));
+    }
+
+
+
+    /**
+     * Get array with class names to build dice graphics
+     *
+     * @return array with class names for dice graphics
+     */
+
+    public function getGraphics()
+    {
+        return $this->graphic;
     }
 }

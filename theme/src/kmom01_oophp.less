@@ -58,6 +58,12 @@
 @import "layout/layout_kmom01.less";
 @import "layout/responsive_kmom01.less";
 
+
+/**
+* Dice game
+*/
+@import "modules/dicegame.less";
+
 // Colors
 
 
@@ -174,13 +180,16 @@ h1 {
     }
 }
 
-h1,
+h1 {
+    border-bottom: 1px solid #666;
+    font-weight: 300;
+}
+
 h2,
 h3,
 h4,
 h5,
 h6 {
-    border-bottom: 1px solid #666;
     font-weight: 300;
 }
 

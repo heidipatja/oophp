@@ -5,7 +5,7 @@
  namespace Hepa19\Dice;
 
  /**
- * A dicehand, consisting of dices.
+ * Dice graphics
  */
 class DiceGraphic extends Dice
 {
@@ -17,7 +17,7 @@ class DiceGraphic extends Dice
 
 
     /**
-     * Constructor to initiate the dice with six number of sides.
+     * Constructor to initiate the dice with six sides.
      */
     public function __construct()
     {

@@ -5060,14 +5060,21 @@ a:hover {
 h1 a {
   text-decoration: none;
 }
+label {
+  margin-bottom: 0.2rem;
+}
 input {
-  padding: 0;
+  padding: 0.3rem;
+  height: 36px;
+  border: 1px solid #4a5559;
+  margin-bottom: 12px;
 }
 input[type=text],
 input[type=number] {
   width: 10em;
-  height: 36px;
-  border: 1px solid #4a5559;
+}
+input[type=number] {
+  width: 5em;
 }
 input[type=submit] {
   font-size: 1em;
@@ -5075,7 +5082,7 @@ input[type=submit] {
   padding: 0 2em;
   height: 36px;
   text-decoration: none;
-  margin: 1em 0;
+  margin: 1em 0.5em 1em 0;
   background-color: #d3dfe3;
 }
 h1,
@@ -5830,7 +5837,7 @@ figure.figure-codepen {
 .region-sidebar-right,
 .author-byline,
 .next-previous {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2.5rem;
 }
 /* Header */
 .outer-wrap-header {
@@ -6075,6 +6082,93 @@ article ol {
     top: 0;
   }
 }
+/**
+* Dice game
+*/
+/**
+ * CSS sprite for a dice with six faces.
+ * For dice game
+ */
+.dice-graphics {
+  margin-bottom: 12px;
+}
+.dice-sprite {
+  display: inline-block;
+  padding: 0;
+  margin: 0 18px 0 0;
+  width: 32px;
+  height: 32px;
+  background: url(../../view/spel/dice/img/dice-faces.jpg) no-repeat;
+}
+.dice-sprite.dice-1 {
+  background-position: -160px 0;
+}
+.dice-sprite.dice-2 {
+  background-position: -128px 0;
+}
+.dice-sprite.dice-3 {
+  background-position: -96px 0;
+}
+.dice-sprite.dice-4 {
+  background-position: -64px 0;
+}
+.dice-sprite.dice-5 {
+  background-position: -32px 0;
+}
+.dice-sprite.dice-6 {
+  background-position: 0 0;
+}
+.init-form label,
+.init-form input {
+  display: block;
+}
+.score-board,
+.init {
+  background-color: #eee;
+  padding: 12px 24px;
+  float: left;
+  width: 30%;
+  min-height: 364px;
+  margin-bottom: 24px;
+}
+.score-board h2,
+.init h2 {
+  border-bottom: none;
+}
+.round,
+.rules {
+  float: left;
+  padding: 12px 24px 12px 48px;
+  width: 65%;
+}
+.round h2,
+.rules h2 {
+  border-bottom: none;
+}
+.end {
+  clear: both;
+}
+.action {
+  font-weight: 400;
+  color: #0b3e3c;
+}
+.stats p {
+  margin-bottom: 0;
+  margin-top: 12px;
+}
+.stats p:last-of-type {
+  margin-bottom: 24px;
+}
+input.roll {
+  background-color: #ffd8a0;
+}
+input.save {
+  background-color: #c0dec0;
+}
+input.start {
+  background-color: #c0dec0;
+  margin-top: 24px;
+}
 @font-face {
   font-family: 'Raleway';
   font-style: normal;
@@ -6149,13 +6243,15 @@ h1 {
 .toc li:hover a {
   padding-left: 18px;
 }
-h1,
+h1 {
+  border-bottom: 1px solid #666;
+  font-weight: 300;
+}
 h2,
 h3,
 h4,
 h5,
 h6 {
-  border-bottom: 1px solid #666;
   font-weight: 300;
 }
 a {
