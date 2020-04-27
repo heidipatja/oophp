@@ -1,29 +1,9 @@
 # oophp
 
-Me page for the course oophp at BTH.
+Me page for the course oophp at BTH. Learning object oriented programming with PHP and creating some games and stuff.
 
-### Versions
-
-#### First commit
-Copied and uploaded base from [dbwebb](https://github.com/dbwebb-se/oophp)
-
-#### v1.0.0
-Style, general structure, presentation and images done.
-
-#### v1.0.1
-Kmom01 done.
-
-#### v2.0.0
-Integrated Guess My Number game into framework
-
-#### v2.0.1
-Fixed tag...
-
-#### v2.0.2
-Added style and fixes to guess game
-
-#### v2.0.3
-Final touches and report for kmom02 done
+#### Basic structure
+Base from [dbwebb](https://github.com/dbwebb-se/oophp)
 
 =======
 

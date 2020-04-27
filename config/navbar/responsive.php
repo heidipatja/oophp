@@ -85,6 +85,11 @@ return [
                         "url" => "spel/dice/init",
                         "title" => "Tärningsspelet 100",
                     ],
+                    [
+                        "text" => "Tärning v2",
+                        "url" => "spel/dice2/init",
+                        "title" => "Tärningsspelet 100 v2",
+                    ],
                 ],
             ],
         ],
