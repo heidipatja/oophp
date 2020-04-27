@@ -2,7 +2,7 @@
 /**
  * Namespace
  */
- namespace Hepa19\Dice;
+ namespace Hepa19\DiceV2;
 
  /**
  * A dicehand, consisting of dices.
@@ -191,7 +191,7 @@ class DiceGame
 
     public function isComputer()
     {
-        if (get_class($this->currentPlayer) == "Hepa19\Dice\DicePlayerComputer") {
+        if (get_class($this->currentPlayer) == "Hepa19\DiceV2\DicePlayerComputer") {
             return true;
         } else {
             return false;

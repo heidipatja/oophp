@@ -2,7 +2,7 @@
 /**
  * Namespace
  */
- namespace Hepa19\Dice;
+ namespace Hepa19\DiceV2;
 
  /**
  * A dicehand, hand consisting of a number of dices.

@@ -2,7 +2,7 @@
 /**
  * Namespace
  */
- namespace Hepa19\Dice;
+ namespace Hepa19\DiceV2;
 
  /**
  * A round in the dice game

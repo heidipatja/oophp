@@ -1,219 +1,255 @@
 <?php
 
-namespace Anax\Controller;
+namespace Hepa19\DiceV2;
 
-use Anax\Commons\ContainerInjectableInterface;
-use Anax\Commons\ContainerInjectableTrait;
-
-// use Anax\Route\Exception\ForbiddenException;
-// use Anax\Route\Exception\NotFoundException;
-// use Anax\Route\Exception\InternalErrorException;
+use Anax\Commons\AppInjectableInterface;
+use Anax\Commons\AppInjectableTrait;
 
 /**
- * A sample controller to show how a controller class can be implemented.
- * The controller will be injected with $di if implementing the interface
- * ContainerInjectableInterface, like this sample class does.
- * The controller is mounted on a particular route and can then handle all
- * requests for that mount point.
- *
- * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ * Controller for Dice Game v2
  */
-class SampleController implements ContainerInjectableInterface
+class DiceController implements AppInjectableInterface
 {
-    use ContainerInjectableTrait;
-
-
+    use AppInjectableTrait;
 
     /**
-     * @var string $db a sample member variable that gets initialised
-     */
-    private $db = "not active";
-
-
-
-    /**
-     * The initialize method is optional and will always be called before the
-     * target method/action. This is a convienient method where you could
-     * setup internal properties that are commonly used by several methods.
+     * Index, redirects to init
      *
-     * @return void
+     * @return object
      */
-    public function initialize() : void
+    public function indexAction() : object
     {
-        // Use to initialise member variables.
-        $this->db = "active";
+        return $this->app->response->redirect("spel/dice2/init");
     }
 
 
 
     /**
-     * This is the index method action, it handles:
-     * ANY METHOD mountpoint
-     * ANY METHOD mountpoint/
-     * ANY METHOD mountpoint/index
+     * Game set up
+     * Get input from user such as name and number of players and dices
      *
-     * @return string
+     * @return object
      */
-    public function indexAction() : string
+    public function initAction() : object
     {
-        // Deal with the action and return a response.
-        return __METHOD__ . ", \$db is {$this->db}";
+        $page = $this->app->page;
+        $title = "Tärningsspelet 100 - Sätt upp spelet";
+
+        $page->add("spel/dice2/init");
+
+        return $page->render([
+            "title" => $title,
+        ]);
     }
 
 
 
     /**
-     * This sample method dumps the content of $di.
-     * GET mountpoint/dump-app
+     * Init the dice game, redirect to play
      *
-     * @return string
+     * @return object
      */
-    public function dumpDiActionGet() : string
+    public function initActionPost() : object
     {
-        // Deal with the action and return a response.
-        $services = implode(", ", $this->di->getServices());
-        return __METHOD__ . "<p>\$di contains: $services";
+        $request = $this->app->request;
+        $response = $this->app->response;
+        $session = $this->app->session;
+
+        $name = $request->getPost("name");
+        $players = $request->getPost("players");
+        $dices = $request->getPost("dices");
+
+        $dicegame = new DiceGame(100, $name, $dices, $players);
+
+        $session->set("dicegame", $dicegame);
+        $session->set("players", $dicegame->getPlayers());
+
+        return $response->redirect("spel/dice2/play");
+    }
+
+
+    /**
+     * Show game status and play the game
+     *
+     * @return object
+     */
+    public function playActionGet() : object
+    {
+        $title = "Tärningsspelet 100 - Spela";
+
+        $request = $this->app->request;
+        $response = $this->app->response;
+        $session = $this->app->session;
+        $page = $this->app->page;
+
+        $dicegame = $session->get("dicegame");
+        $players = $session->get("players");
+
+        $hasOnes = $dicegame->hasOnes();
+        $isComputer = $dicegame->isComputer();
+        $currentPlayer = $dicegame->getCurrentPlayer();
+        $currentHand = $currentPlayer->getPlayerHand();
+        $currentRound = $dicegame->getCurrentRound();
+        $roundSum = $currentRound->getRoundSum();
+        $rollSum = $currentHand->getSum();
+        $graphics = $currentHand->getGraphics();
+        $action = null;
+        if ($dicegame->isComputer()) {
+            $action = $dicegame->playComputer();
+        }
+
+        $session->set("roundSum", $currentRound->getRoundSum());
+        $session->set("currentRound", $dicegame->getCurrentRound());
+        $session->set("currentPlayer", $dicegame->getCurrentPlayer());
+        $session->set("rollSum", $currentHand->getSum());
+        $session->set("isComputer", $dicegame->isComputer());
+
+        $data = [
+            "players" => $players,
+            "currentPlayer" => $currentPlayer,
+            "currentRound" => $currentRound,
+            "currentHand" => $currentHand,
+            "graphics" => $graphics,
+            "roundSum" => $roundSum,
+            "rollSum" => $rollSum,
+            "action" => $action,
+            "hasOnes" => $hasOnes,
+            "isComputer" => $isComputer
+        ];
+
+        $page->add("spel/dice2/play", $data);
+
+        return $page->render([
+            "title" => $title,
+        ]);
+    }
+
+
+    /**
+     * Choosing a route based on POST info
+     *
+     * @return object
+     */
+    public function playActionPost() : object
+    {
+        $request = $this->app->request;
+        $response = $this->app->response;
+        $session = $this->app->session;
+        $page = $this->app->page;
+
+        $dicegame = $session->get("dicegame");
+
+        $init = $request->getPost("init");
+        $roll = $request->getPost("roll");
+        $save = $request->getPost("save");
+        $newround = $request->getPost("newround");
+        $playcomputer = $request->getPost("playcomputer");
+
+        if ($init) {
+            return $response->redirect("spel/dice2/init");
+        } else if ($roll) {
+            return $response->redirect("spel/dice2/roll");
+        } else if ($save) {
+            return $response->redirect("spel/dice2/save");
+        } else if ($newround) {
+            return $response->redirect("spel/dice2/new-round");
+        } else if ($playcomputer) {
+            $action = $dicegame->playComputer();
+            return $response->redirect("spel/dice2/" . $action);
+        } else {
+            return $response->redirect("spel/dice2/init");
+        }
     }
 
 
 
     /**
-     * Add the request method to the method name to limit what request methods
-     * the handler supports.
-     * GET mountpoint/info
+     * Roll dice
      *
-     * @return string
+     * @return object
      */
-    public function infoActionGet() : string
+    public function rollActionGet() : object
     {
-        // Deal with the action and return a response.
-        return __METHOD__ . ", \$db is {$this->db}";
+        $response = $this->app->response;
+        $session = $this->app->session;
+        $dicegame = $session->get("dicegame");
+        $dicegame->roll();
+
+        return $response->redirect("spel/dice2/play");
     }
 
 
 
     /**
-     * This sample method action it the handler for route:
-     * GET mountpoint/create
+     * New round
      *
-     * @return string
+     * @return object
      */
-    public function createActionGet() : string
+    public function newroundActionGet() : object
     {
-        // Deal with the action and return a response.
-        return __METHOD__ . ", \$db is {$this->db}";
+        $response = $this->app->response;
+        $session = $this->app->session;
+        $dicegame = $session->get("dicegame");
+        $dicegame->goToNextRound();
+
+        return $response->redirect("spel/dice2/play");
+    }
+
+    /**
+     * Save dice values
+     *
+     * @return object
+     */
+    public function saveActionGet() : object
+    {
+        $response = $this->app->response;
+        $session = $this->app->session;
+
+        $dicegame = $session->get("dicegame");
+        $dicegame->save();
+        $currentPlayer = $dicegame->getCurrentPlayer();
+        $currentHand = $currentPlayer->getPlayerHand();
+        $currentRound = $dicegame->getCurrentRound();
+
+        $session->set("currentRound", $dicegame->getCurrentRound());
+        $session->set("currentPlayer", $dicegame->getCurrentPlayer());
+        $session->set("rollSum", $currentHand->getSum());
+        $session->set("roundSum", $currentRound->getRoundSum());
+
+        if ($dicegame->hasWon()) {
+            return $response->redirect("spel/dice2/end");
+        } else {
+            return $response->redirect("spel/dice2/new-round");
+        }
     }
 
 
 
     /**
-     * This sample method action it the handler for route:
-     * POST mountpoint/create
+     * End the dive game, show who won and button to play again
      *
-     * @return string
+     * @return object
      */
-    public function createActionPost() : string
+    public function endActionGet() : object
     {
-        // Deal with the action and return a response.
-        return __METHOD__ . ", \$db is {$this->db}";
-    }
+        $page = $this->app->page;
+        $session = $this->app->session;
+        $title = "Tärningsspelet 100 - Spelet är slut!";
 
+        $dicegame = $session->get("dicegame");
+        $players = $session->get("players");
 
+        $currentPlayer = $dicegame->getCurrentPlayer();
 
-    /**
-     * This sample method action takes one argument:
-     * GET mountpoint/argument/<value>
-     *
-     * @param mixed $value
-     *
-     * @return string
-     */
-    public function argumentActionGet($value) : string
-    {
-        // Deal with the action and return a response.
-        return __METHOD__ . ", \$db is {$this->db}, got argument '$value'";
-    }
+        $data = [
+            "players" => $players,
+            "currentPlayer" => $currentPlayer
+        ];
 
+        $page->add("spel/dice2/end", $data);
 
-
-    /**
-     * This sample method action takes zero or one argument and you can use - as a separator which will then be removed:
-     * GET mountpoint/defaultargument/
-     * GET mountpoint/defaultargument/<value>
-     * GET mountpoint/default-argument/
-     * GET mountpoint/default-argument/<value>
-     *
-     * @param mixed $value with a default string.
-     *
-     * @return string
-     */
-    public function defaultArgumentActionGet($value = "default") : string
-    {
-        // Deal with the action and return a response.
-        return __METHOD__ . ", \$db is {$this->db}, got argument '$value'";
-    }
-
-
-
-    /**
-     * This sample method action takes two typed arguments:
-     * GET mountpoint/typed-argument/<string>/<int>
-     *
-     * NOTE. Its recommended to not use int as type since it will still
-     * accept numbers such as 2hundred givving a PHP NOTICE. So, its better to
-     * deal with type check within the action method and throuw exceptions
-     * when the expected type is not met.
-     *
-     * @param mixed $value with a default string.
-     *
-     * @return string
-     */
-    public function typedArgumentActionGet(string $str, int $int) : string
-    {
-        // Deal with the action and return a response.
-        return __METHOD__ . ", \$db is {$this->db}, got string argument '$str' and int argument '$int'.";
-    }
-
-
-
-    /**
-     * This sample method action takes a variadic list of arguments:
-     * GET mountpoint/variadic/
-     * GET mountpoint/variadic/<value>
-     * GET mountpoint/variadic/<value>/<value>
-     * GET mountpoint/variadic/<value>/<value>/<value>
-     * etc.
-     *
-     * @param array $value as a variadic parameter.
-     *
-     * @return string
-     */
-    public function variadicActionGet(...$value) : string
-    {
-        // Deal with the action and return a response.
-        return __METHOD__ . ", \$db is {$this->db}, got '" . count($value) . "' arguments: " . implode(", ", $value);
-    }
-
-
-
-    /**
-     * Adding an optional catchAll() method will catch all actions sent to the
-     * router. You can then reply with an actual response or return void to
-     * allow for the router to move on to next handler.
-     * A catchAll() handles the following, if a specific action method is not
-     * created:
-     * ANY METHOD mountpoint/**
-     *
-     * @param array $args as a variadic parameter.
-     *
-     * @return mixed
-     *
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     */
-    public function catchAll(...$args)
-    {
-        // Deal with the request and send an actual response, or not.
-        //return __METHOD__ . ", \$db is {$this->db}, got '" . count($args) . "' arguments: " . implode(", ", $args);
-        return;
+        return $page->render([
+            "title" => $title,
+        ]);
     }
 }
