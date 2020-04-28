@@ -19,7 +19,16 @@ namespace Anax\View;
         <?php endforeach; ?>
     </div>
 
+
+    <h2>Histogram</h2>
+
+    <div class="histogram stats">
+        <p><?= $histogram->getAsText() ?></p>
+    </div>
+
 </div>
+
+
 
 
 

@@ -9,6 +9,8 @@
  */
 class DiceGame
 {
+    // use HistogramTrait;
+
     /**
      * @var int $scoreToWin   Score required to win the game
      * @var int $noOfPlayers   Number of players in the game
@@ -16,12 +18,14 @@ class DiceGame
      * @var int $dices   Number of dices per player/hand
      * @var object $currentPlayer   Current player
      * @var DiceRound $currentRound   Current round
+     * @var Histogram $histogram   Histogram over all rolls in game
      */
     private $scoreToWin;
     private $noOfPlayers;
     private $players;
     private $currentPlayer;
     private $currentRound;
+    private $histogram;
 
 
 
@@ -51,6 +55,9 @@ class DiceGame
 
         $this->currentPlayer = $this->players[0];
         $this->currentRound = new DiceRound($this->currentPlayer);
+
+        $this->histogram = new Histogram();
+        $this->histogram->injectData($this->currentPlayer->getPlayerHand());
     }
 
 
@@ -81,7 +88,6 @@ class DiceGame
 
 
 
-
     /**
      * Get current round
      *
@@ -91,6 +97,19 @@ class DiceGame
     public function getCurrentRound()
     {
         return $this->currentRound;
+    }
+
+
+
+    /**
+     * Get histogram
+     *
+     * @return Histogram
+     */
+
+    public function getHistogram()
+    {
+        return $this->histogram;
     }
 
 
@@ -127,8 +146,10 @@ class DiceGame
     public function roll()
     {
         $this->currentPlayer->roll();
+        $this->histogram->getSerie();
         $rollSum = $this->currentPlayer->getSum();
         $this->currentRound->setRoundSum($rollSum);
+        $this->histogram->injectData($this->currentPlayer->getPlayerHand());
     }
 
 

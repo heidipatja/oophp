@@ -77,14 +77,13 @@ class DiceController implements AppInjectableInterface
     {
         $title = "Tärningsspelet 100 - Spela";
 
-        $request = $this->app->request;
-        $response = $this->app->response;
         $session = $this->app->session;
         $page = $this->app->page;
 
         $dicegame = $session->get("dicegame");
         $players = $session->get("players");
 
+        $histogram = $dicegame->getHistogram();
         $hasOnes = $dicegame->hasOnes();
         $isComputer = $dicegame->isComputer();
         $currentPlayer = $dicegame->getCurrentPlayer();
@@ -114,7 +113,8 @@ class DiceController implements AppInjectableInterface
             "rollSum" => $rollSum,
             "action" => $action,
             "hasOnes" => $hasOnes,
-            "isComputer" => $isComputer
+            "isComputer" => $isComputer,
+            "histogram" => $histogram,
         ];
 
         $page->add("spel/dice2/play", $data);
@@ -135,7 +135,6 @@ class DiceController implements AppInjectableInterface
         $request = $this->app->request;
         $response = $this->app->response;
         $session = $this->app->session;
-        $page = $this->app->page;
 
         $dicegame = $session->get("dicegame");
 

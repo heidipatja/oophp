@@ -7,8 +7,9 @@
  /**
  * A dicehand, hand consisting of a number of dices.
  */
-class DiceHand
+class DiceHand implements HistogramInterface
 {
+    use HistogramTrait;
     /**
      * @var array $dices   Array consisting of dices.
      * @var array  $values  Array consisting of values for last roll of dices.
@@ -18,6 +19,7 @@ class DiceHand
     private $dices;
     private $values;
     private $graphic;
+
 
     /**
      * Constructor to initiate the dice hand with a number of dices.
@@ -34,7 +36,7 @@ class DiceHand
         $this->graphic = [];
 
         for ($i = 0; $i < $dices; $i++) {
-            $this->dices[] = new DiceGraphic();
+            $this->dices[] = new Dice();
         }
     }
 
@@ -69,6 +71,32 @@ class DiceHand
      */
 
     public function getValues()
+    {
+        return $this->values;
+    }
+
+
+
+    /**
+     * Get dices from last roll.
+     *
+     * @return array with values of the last roll.
+     */
+
+    public function getDices()
+    {
+        return $this->dices;
+    }
+
+
+
+    /**
+     * Get dices from last roll.
+     *
+     * @return array with values of the last roll.
+     */
+
+    public function getHistogramSerie()
     {
         return $this->values;
     }

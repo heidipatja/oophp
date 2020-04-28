@@ -35,7 +35,7 @@ class Dice
     /**
      * Randomize dice value to value between 1 and number of sides (roll dice)
      *
-     * @return void
+     * @return int
      */
 
     public function roll()
@@ -47,13 +47,35 @@ class Dice
 
 
     /**
+     * Return number of sides of dice
+     *
+     * @return int
+     */
+
+    public function getHistogramMax()
+    {
+        return $this->sides;
+    }
+
+
+    /**
      * Get last roll on dice
      *
-     * @return void
+     * @return int
      */
 
     public function getLastRoll()
     {
         return $this->value;
+    }
+
+    /**
+     * Get class name for graphics
+     *
+     * @return string class name
+    */
+    public function graphic()
+    {
+        return "dice-" . $this->getLastRoll();
     }
 }
