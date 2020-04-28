@@ -146,7 +146,6 @@ class DiceGame
     public function roll()
     {
         $this->currentPlayer->roll();
-        // $this->histogram->getSerie();
         $rollSum = $this->currentPlayer->getSum();
         $this->currentRound->setRoundSum($rollSum);
         $this->histogram->injectData($this->currentPlayer->getPlayerHand());
