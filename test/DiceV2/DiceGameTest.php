@@ -132,22 +132,6 @@ class DiceGameTest extends TestCase
 
 
 
-    // /**
-    //  * Test creating new round
-    //  */
-    // public function testGoToNextRound()
-    // {
-    //     $game = new DiceGame(100, "Heidi", 2, 2);
-    //     $game->roll();
-    //     $round = $game->getCurrentRound();
-    //     $game->goToNextRound();
-    //     $newround = $game->getCurrentRound();
-    //
-    //     $this->assertNotEquals($round, $newround);
-    // }
-
-
-
     /**
      * Test to play computer
      */

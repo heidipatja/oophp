@@ -83,19 +83,6 @@ class DiceHand implements HistogramInterface
      * @return array with values of the last roll.
      */
 
-    public function getDices()
-    {
-        return $this->dices;
-    }
-
-
-
-    /**
-     * Get dices from last roll.
-     *
-     * @return array with values of the last roll.
-     */
-
     public function getHistogramSerie()
     {
         return $this->values;

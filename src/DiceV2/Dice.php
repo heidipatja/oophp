@@ -14,7 +14,7 @@ class Dice
      * @var int $sides    Number of sides of dice
      * @var int $value    Last roll
      */
-    private $sides;
+    protected $sides;
     private $value;
 
 
@@ -44,18 +44,6 @@ class Dice
         return $this->value;
     }
 
-
-
-    /**
-     * Return number of sides of dice
-     *
-     * @return int
-     */
-
-    public function getHistogramMax()
-    {
-        return $this->sides;
-    }
 
 
     /**
