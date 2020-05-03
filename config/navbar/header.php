@@ -92,16 +92,21 @@ return [
                 ],
             ],
         ],
+        // [
+        //     "text" => "Docs",
+        //     "url" => "dokumentation",
+        //     "title" => "Dokumentation av ramverk och liknande.",
+        // ],
         [
-            "text" => "Docs",
-            "url" => "dokumentation",
-            "title" => "Dokumentation av ramverk och liknande.",
+            "text" => "Filmer",
+            "url" => "movie",
+            "title" => "Filmdatabas",
         ],
-        [
-            "text" => "Test",
-            "url" => "lek",
-            "title" => "Testa och lek med test- och exempelprogram",
-        ],
+        // [
+        //     "text" => "Test",
+        //     "url" => "lek",
+        //     "title" => "Testa och lek med test- och exempelprogram",
+        // ],
         [
             "text" => "Dev",
             "url" => "dev",

@@ -34,6 +34,11 @@ return [
             "title" => "Spela spel",
         ],
         [
+            "text" => "Filmer",
+            "url" => "movie",
+            "title" => "Filmdatabas",
+        ],
+        [
             "text" => "Verktyg",
             "url" => "verktyg",
             "title" => "Verktyg och möjligheter för utveckling.",
