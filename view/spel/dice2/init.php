@@ -24,8 +24,6 @@ namespace Anax\View;
 
 </div>
 
-
-
 <div class="rules">
 
     <h2>Spelregler</h2>

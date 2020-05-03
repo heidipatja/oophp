@@ -7,4 +7,4 @@ Spelsugen? Klicka på någon av länkarna för att starta ett spel.
 
 [Tärningsspelet 100](spel/dice/init)
 
-[Tärningsspelet 100 med controller](spel/dice2/init)
+[Tärningsspelet 100 med histogram](spel/dice2/init)

@@ -9,20 +9,6 @@ namespace Anax\View;
 
 ?><h1>Tärning 100</h1>
 
-<div class="score-board">
-
-    <h2>Ställning</h2>
-
-    <div class="stats">
-        <?php foreach ($players as $player) : ?>
-            <p><?= $player->getName() ?>: <?= $player->getScore() ?> </p>
-        <?php endforeach; ?>
-    </div>
-
-</div>
-
-
-
 <div class="round">
 
     <h2>Nuvarande runda</h2>
@@ -68,5 +54,17 @@ namespace Anax\View;
         </form>
 
     <?php endif ?>
+
+</div>
+
+<div class="score-board">
+
+    <h2>Ställning</h2>
+
+    <div class="stats">
+        <?php foreach ($players as $player) : ?>
+            <p><?= $player->getName() ?>: <?= $player->getScore() ?> </p>
+        <?php endforeach; ?>
+    </div>
 
 </div>

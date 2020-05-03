@@ -6122,7 +6122,25 @@ article ol {
 .init-form input {
   display: block;
 }
-.score-board,
+.score-board {
+  background-color: #eee;
+  padding: 12px 24px 12px 48px;
+  float: left;
+  width: 30%;
+  min-height: 450px;
+  margin-bottom: 24px;
+}
+.score-board h2 {
+  border-bottom: none;
+}
+.round {
+  float: right;
+  padding: 12px 24px;
+  width: 65%;
+}
+.round h2 {
+  border-bottom: none;
+}
 .init {
   background-color: #eee;
   padding: 12px 24px;
@@ -6131,17 +6149,14 @@ article ol {
   min-height: 450px;
   margin-bottom: 24px;
 }
-.score-board h2,
 .init h2 {
   border-bottom: none;
 }
-.round,
 .rules {
   float: left;
   padding: 12px 24px 12px 48px;
   width: 65%;
 }
-.round h2,
 .rules h2 {
   border-bottom: none;
 }
@@ -6168,6 +6183,15 @@ input.save {
 input.start {
   background-color: #c0dec0;
   margin-top: 24px;
+}
+@media screen and (max-width: 750px) {
+  .init,
+  .score-board,
+  .round,
+  .rules {
+    width: 100%;
+    padding: 12px 24px;
+  }
 }
 @font-face {
   font-family: 'Raleway';
