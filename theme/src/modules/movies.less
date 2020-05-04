@@ -1,0 +1,62 @@
+
+/**
+ * CSS for movie database
+ */
+
+
+input.edit,
+input.reset {
+    background-color: #d3dfe3;
+}
+
+input.add {
+    background-color: #c0dec0;
+}
+
+input.delete {
+    background-color: #ffa5a1;
+}
+
+.navbar {
+    background-color: #eee;
+    padding: 1em;
+    width: 100%;
+    display: block;
+    color: #333;
+
+    & a {
+        padding: 0 1em;
+        font-weight: 500;
+        color: #333;
+
+        &:first-of-type {
+            padding-left: 0;
+        }
+    }
+}
+
+.movie-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    & th {
+        white-space: nowrap;
+        text-align: left;
+        padding: 0.5rem 0.8rem;
+        font-weight: 600;
+    }
+
+    & tr {
+        padding: 0.5rem;
+    }
+
+    & td {
+        white-space: nowrap;
+        padding: 0.5rem 0.8rem;
+    }
+
+    .first {
+        background-color: #eee;
+        min-height: 2em;
+    }
+}

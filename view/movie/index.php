@@ -21,7 +21,7 @@ $defaultRoute = "?route=show-all-paginate&"
     <a href="<?= mergeQueryString(["hits" => 8], $defaultRoute) ?>">8</a>
 </p>
 
-<table>
+<table class="movie-table">
     <tr class="first">
         <th>Rad</th>
         <th>Id <?= orderby2("id", $defaultRoute) ?></th>

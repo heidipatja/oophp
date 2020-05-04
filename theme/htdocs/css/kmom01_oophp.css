@@ -5062,6 +5062,7 @@ h1 a {
 }
 label {
   margin-bottom: 0.2rem;
+  display: block;
 }
 input {
   padding: 0.3rem;
@@ -5076,7 +5077,8 @@ input[type=number] {
 input[type=number] {
   width: 5em;
 }
-input[type=submit] {
+input[type=submit],
+input[type=reset] {
   font-size: 1em;
   border: 1px solid #4a5559;
   padding: 0 2em;
@@ -6083,7 +6085,7 @@ article ol {
   }
 }
 /**
-* Dice game
+* Modules
 */
 /**
  * CSS sprite for a dice with six faces.
@@ -6192,6 +6194,55 @@ input.start {
     width: 100%;
     padding: 12px 24px;
   }
+}
+/**
+ * CSS for movie database
+ */
+input.edit,
+input.reset {
+  background-color: #d3dfe3;
+}
+input.add {
+  background-color: #c0dec0;
+}
+input.delete {
+  background-color: #ffa5a1;
+}
+.navbar {
+  background-color: #eee;
+  padding: 1em;
+  width: 100%;
+  display: block;
+  color: #333;
+}
+.navbar a {
+  padding: 0 1em;
+  font-weight: 500;
+  color: #333;
+}
+.navbar a:first-of-type {
+  padding-left: 0;
+}
+.movie-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.movie-table th {
+  white-space: nowrap;
+  text-align: left;
+  padding: 0.5rem 0.8rem;
+  font-weight: 600;
+}
+.movie-table tr {
+  padding: 0.5rem;
+}
+.movie-table td {
+  white-space: nowrap;
+  padding: 0.5rem 0.8rem;
+}
+.movie-table .first {
+  background-color: #eee;
+  min-height: 2em;
 }
 @font-face {
   font-family: 'Raleway';

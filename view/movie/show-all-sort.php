@@ -13,7 +13,7 @@ if (!$resultset) {
 $defaultRoute = "?route=show-all-sort&"
 ?>
 
-<table>
+<table class="movie-table">
     <tr class="first">
         <th>Rad</th>
         <th>Id <?= orderby("id", $defaultRoute) ?></th>

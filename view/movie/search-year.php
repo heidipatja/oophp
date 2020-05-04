@@ -10,7 +10,7 @@ namespace Anax\View;
 
 <h1>Sök på år</h1>
 
-<p>Sök efter en film genom att använda årtal. Använd % som wildcard.</p>
+<p>Sök efter en film genom att använda årtal.</p>
 
 <form method="get">
     <input type="hidden" name="route" value="search-year">
