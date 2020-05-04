@@ -184,15 +184,19 @@ class MovieController implements AppInjectableInterface
     /**
      * CRUD redirect to add, edit or delete
      *
-     * @return object
+     * @return void
      */
-    public function movieSelectActionPost() : object
+    public function movieSelectActionPost()
     {
         $response = $this->app->response;
         $db = $this->app->db;
         $db->connect();
 
         $movieId = getPost("movieId");
+
+        if (!$movieID) {
+            return $this->app->response->redirect("movie/movie-select");
+        }
 
         if (getPost("doDelete")) {
             $this->movieDeleteActionPost($movieId);
