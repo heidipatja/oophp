@@ -26,8 +26,8 @@ namespace Anax\View;
 
         <br>
 
-        <input type="submit" class="save" name="doSave" value="Save">
-        <input type="reset" class="reset" value="Reset">
+        <input type="submit" class="save" name="doSave" value="Spara">
+        <input type="reset" class="reset" value="Ångra">
 
         <p>
             <a href="movie-select">Tillbaka</a>

@@ -8,26 +8,39 @@ use Anax\Commons\AppInjectableTrait;
 /**
  * Controller for Movie database
  */
+/** * @SuppressWarnings(PHPMD.TooManyPublicMethods) * @return bool */
 class MovieController implements AppInjectableInterface
 {
     use AppInjectableTrait;
+
+    /**
+     * Connect to database
+     *
+     * @return object
+     */
+    public function initialize()
+    {
+        $this->app->db->connect();
+    }
+
+
 
     /**
      * Index page, connect to db and show index page
      *
      * @return object
      */
+    /** * @SuppressWarnings(PHPMD.CyclomaticComplexity) * @return bool */
     public function indexActionGet() : object
     {
         $db = $this->app->db;
-        $db->connect();
 
         $title = "Filmdatabasen";
 
         // Get number of hits per page
         $hits = getGet("hits", 4);
         if (!(is_numeric($hits) && $hits > 0 && $hits <= 8)) {
-            die("Not valid for hits.");
+            return $this->app->response->redirect("movie");
         }
 
         // Get max number of pages
@@ -38,7 +51,7 @@ class MovieController implements AppInjectableInterface
         // Get current page
         $page = getGet("page", 1);
         if (!(is_numeric($hits) && $page > 0 && $page <= $max)) {
-            die("Not valid for page.");
+            return $this->app->response->redirect("movie");
         }
         $offset = $hits * ($page - 1);
 
@@ -52,7 +65,7 @@ class MovieController implements AppInjectableInterface
 
         // Incoming matches valid value sets
         if (!(in_array($orderBy, $columns) && in_array($order, $orders))) {
-            die("Not valid input for sorting.");
+            return $this->app->response->redirect("movie");
         }
 
         $sql = "SELECT * FROM movie ORDER BY $orderBy $order LIMIT $hits OFFSET $offset;";
@@ -83,7 +96,6 @@ class MovieController implements AppInjectableInterface
     {
         $page = $this->app->page;
         $db = $this->app->db;
-        $db->connect();
 
         $title = "Sök filmtitel - Filmdatabasen";
         $searchTitle = getGet("searchTitle");
@@ -118,7 +130,6 @@ class MovieController implements AppInjectableInterface
     {
         $page = $this->app->page;
         $db = $this->app->db;
-        $db->connect();
 
         $title = "Sök filmår - Filmdatabasen";
         $year1 = getGet("year1");
@@ -161,7 +172,6 @@ class MovieController implements AppInjectableInterface
     {
         $page = $this->app->page;
         $db = $this->app->db;
-        $db->connect();
 
         $title = "Välj film - Filmdatabasen";
         $sql = "SELECT id, title FROM movie;";
@@ -190,11 +200,10 @@ class MovieController implements AppInjectableInterface
     {
         $response = $this->app->response;
         $db = $this->app->db;
-        $db->connect();
 
         $movieId = getPost("movieId");
 
-        if (!$movieId) {
+        if (!$movieId && getPost("doEdit")) {
             return $this->app->response->redirect("movie/movie-select");
         }
 
@@ -219,9 +228,7 @@ class MovieController implements AppInjectableInterface
      */
     public function movieDeleteActionPost($movieId) : object
     {
-        $page = $this->app->page;
         $db = $this->app->db;
-        $db->connect();
 
         $sql = "DELETE FROM movie WHERE id = ?;";
         $db->execute($sql, [$movieId]);
@@ -240,7 +247,6 @@ class MovieController implements AppInjectableInterface
     {
         $page = $this->app->page;
         $db = $this->app->db;
-        $db->connect();
 
         $title = "Editera film - Filmdatabasen";
         $movieId = getGet("movieId");
@@ -270,9 +276,7 @@ class MovieController implements AppInjectableInterface
      */
     public function movieEditActionPost() : object
     {
-        $page = $this->app->page;
         $db = $this->app->db;
-        $db->connect();
 
         $movieId    = getPost("movieId") ?: getGet("movieId");
         $movieTitle = getPost("movieTitle");
@@ -294,7 +298,6 @@ class MovieController implements AppInjectableInterface
     public function movieAddActionPost() : object
     {
         $db = $this->app->db;
-        $db->connect();
 
         $sql = "INSERT INTO movie (title, year, image) VALUES (?, ?, ?);";
         $db->execute($sql, ["A title", 2017, "img/noimage.png"]);
@@ -303,40 +306,6 @@ class MovieController implements AppInjectableInterface
         return $this->app->response->redirect("movie/movie-edit?movieId=$movieId");
     }
 
-
-    /**
-     * Reset
-     *
-     * @return string
-     */
-    public function reset() : string
-    {
-        $file   = ANAX_INSTALL_PATH . "/sql/movie/setup.sql";
-        $mysql  = "/Applications/XAMPP/bin/mysql";
-        $output = null;
-
-        $databaseConfig = $this->app->configuration->load("database");
-
-        // var_dump($databaseConfig);
-
-        // Extract hostname and databasename from dsn
-        $dsnDetail = [];
-        preg_match("/mysql:host=(.+);dbname=([^;.]+)/", $databaseConfig["config"]["dsn"], $dsnDetail);
-        $host = $dsnDetail[1];
-        $database = $dsnDetail[2];
-        $username = $databaseConfig["config"]["username"];
-        $password = $databaseConfig["config"]["password"];
-
-        $command = "$mysql -h{$host} -u{$username} -p{$password} $database < $file 2>&1";
-        $output = [];
-        $status = null;
-        $res = exec($command, $output, $status);
-        $output = "<p>The command was: <code>$command</code>.<br>The command exit status was $status."
-            . "<br>The output from the command was:</p><pre>"
-            . print_r($output, 1);
-
-        return $output;
-    }
 
 
     /**
@@ -347,14 +316,36 @@ class MovieController implements AppInjectableInterface
     public function resetActionGet() : object
     {
         $page = $this->app->page;
-        $db = $this->app->db;
-        $db->connect();
 
         $output = null;
         $doReset = getGet("reset") ?? null;
 
         if ($doReset) {
-            $output = $this->reset();
+            $file   = ANAX_INSTALL_PATH . "/sql/movie/setup.sql";
+
+            if ($_SERVER["SERVER_NAME"] === "www.student.bth.se") {
+                $mysql = "/usr/bin/mysql";
+            } else {
+                $mysql = "/Applications/XAMPP/bin/mysql";
+            }
+
+            $output = null;
+            $databaseConfig = $this->app->configuration->load("database");
+            // var_dump($databaseConfig);
+            $dsnDetail = [];
+            preg_match("/mysql:host=(.+);dbname=([^;.]+)/", $databaseConfig["config"]["dsn"], $dsnDetail);
+            $host = $dsnDetail[1];
+            $database = $dsnDetail[2];
+            $username = $databaseConfig["config"]["username"];
+            $password = $databaseConfig["config"]["password"];
+
+            $command = "$mysql -h{$host} -u{$username} -p{$password} $database < $file 2>&1";
+            $output = [];
+            $status = null;
+            exec($command, $output, $status);
+            $output = "<p>The command exit status was $status."
+                . "<br>The output from the command was:</p><pre class='reset-output'>"
+                . print_r($output, 1);
         }
 
         $title = "Återställ databasen - Filmdatabasen";

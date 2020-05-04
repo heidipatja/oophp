@@ -6223,6 +6223,9 @@ input.delete {
 .navbar a:first-of-type {
   padding-left: 0;
 }
+.reset-output {
+  font-size: 0.7em;
+}
 .movie-table {
   width: 100%;
   border-collapse: collapse;
