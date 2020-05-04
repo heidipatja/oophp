@@ -311,7 +311,7 @@ class MovieController implements AppInjectableInterface
      */
     public function reset() : string
     {
-        $file   = "sql/movie/setup.sql";
+        $file   = ANAX_INSTALL_PATH . "/sql/movie/setup.sql";
         $mysql  = "/Applications/XAMPP/bin/mysql";
         $output = null;
 
