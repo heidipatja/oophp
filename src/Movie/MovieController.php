@@ -194,7 +194,7 @@ class MovieController implements AppInjectableInterface
 
         $movieId = getPost("movieId");
 
-        if (!$movieID) {
+        if (!$movieId) {
             return $this->app->response->redirect("movie/movie-select");
         }
 
