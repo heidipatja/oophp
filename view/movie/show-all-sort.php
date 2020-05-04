@@ -3,22 +3,23 @@
 namespace Anax\View;
 
 /**
- * Show all - result page showing movies
+ * Show all - with sorting
  */
 
 
 if (!$resultset) {
     return;
 }
+$defaultRoute = "?route=show-all-sort&"
 ?>
 
 <table>
     <tr class="first">
         <th>Rad</th>
-        <th>Id</th>
-        <th>Bild</th>
-        <th>Titel</th>
-        <th>År</th>
+        <th>Id <?= orderby("id", $defaultRoute) ?></th>
+        <th>Bild <?= orderby("image", $defaultRoute) ?></th>
+        <th>Titel <?= orderby("title", $defaultRoute) ?></th>
+        <th>År <?= orderby("year", $defaultRoute) ?></th>
     </tr>
 <?php $id = -1; foreach ($resultset as $row) :
     $id++; ?>

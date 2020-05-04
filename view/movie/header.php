@@ -9,12 +9,9 @@ namespace Anax\View;
 ?>
 
  <navbar class="navbar">
-     <a href="<?= url("movie/select") ?>">SELECT *</a> |
-     <a href="<?= url("movie/index") ?>">Show all movies</a> |
-     <a href="<?= url("movie/reset") ?>">Reset database</a> |
-     <a href="<?= url("movie/search-title") ?>">Search title</a> |
-     <a href="<?= url("movie/search-year") ?>">Search year</a> |
-     <a href="<?= url("movie/movie-select") ?>">Select</a> |
-     <a href="<?= url("movie/show-all-sort") ?>">Show all sortable</a> |
-     <a href="<?= url("movie/show-all-paginate") ?>">Show all paginate</a> |
+     <a href="<?= url("movie") ?>">Visa alla</a> |
+     <a href="<?= url("movie/reset") ?>">Återställ databas</a> |
+     <a href="<?= url("movie/search-title") ?>">Sök på titel</a> |
+     <a href="<?= url("movie/search-year") ?>">Sök på år</a> |
+     <a href="<?= url("movie/movie-select") ?>">Admin</a> |
  </navbar>

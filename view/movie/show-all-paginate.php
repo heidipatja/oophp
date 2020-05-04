@@ -3,17 +3,14 @@
 namespace Anax\View;
 
 /**
- * Index page for movie database
+ * Show all - with pagination
  */
-
 
 if (!$resultset) {
     return;
 }
 $defaultRoute = "?route=show-all-paginate&"
 ?>
-
-<h1>Filmdatabasen</h1>
 
 <p>Träffar per sida:
     <a href="<?= mergeQueryString(["hits" => 2], $defaultRoute) ?>">2</a> |
@@ -34,7 +31,7 @@ $defaultRoute = "?route=show-all-paginate&"
     <tr>
         <td><?= $id ?></td>
         <td><?= $row->id ?></td>
-        <td><img class="thumb" src="./image/movie/<?= $row->image ?>?w=150&aspect-ratio=3:2&crop-to-fit"></td>
+        <td><img class="thumb" src="../image/movie/<?= $row->image ?>?w=150&aspect-ratio=3:2&crop-to-fit"></td>
         <td><?= $row->title ?></td>
         <td><?= $row->year ?></td>
     </tr>
