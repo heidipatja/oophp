@@ -34,7 +34,7 @@ class FilterController implements AppInjectableInterface
 
 
     /**
-     * Index page for text filter
+     * BBCode text
      *
      * @return object
      */
@@ -43,8 +43,20 @@ class FilterController implements AppInjectableInterface
         $title = "BBCode";
         $page = $this->app->page;
 
+        $bbcodefilter = new MyTextFilter();
+
+        $text = file_get_contents(__DIR__ . "../../../htdocs/text/bbcode.txt");
+        $filter = ["bbcode", "nl2br"];
+
+        $html = $bbcodefilter->parse($text, $filter);
+
+        $data = [
+            "text" => $text,
+            "html" => $html,
+        ];
+
         $page->add("filter/header");
-        $page->add("filter/bbcode");
+        $page->add("filter/bbcode", $data);
 
         return $page->render([
             "title" => $title

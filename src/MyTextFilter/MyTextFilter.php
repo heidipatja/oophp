@@ -33,6 +33,12 @@ class MyTextFilter
      */
     public function parse($text, $filter)
     {
+        foreach ($this->filters as $key => $value) {
+            if (in_array($key, $filter)) {
+                $text = $this->$value($text);
+            }
+        }
+        return $text;
     }
 
 
