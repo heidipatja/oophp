@@ -13,21 +13,13 @@ class FilterController implements AppInjectableInterface
     use AppInjectableTrait;
 
     /**
-     * Index page for text filter
+     * Index page, in case someone tries to go there...
      *
      * @return object
      */
     public function indexActionGet() : object
     {
-        $title = "Textfilter";
-        $page = $this->app->page;
-
-        $page->add("filter/header");
-        $page->add("filter/index");
-
-        return $page->render([
-            "title" => $title
-        ]);
+        $this->app->response->redirect("filter/bbcode");
     }
 
 
@@ -65,7 +57,7 @@ class FilterController implements AppInjectableInterface
 
 
     /**
-     * Index page for text filter
+     * Markdown filter
      *
      * @return object
      */
@@ -97,7 +89,7 @@ class FilterController implements AppInjectableInterface
 
 
     /**
-     * Index page for text filter
+     * Clickable filter
      *
      * @return object
      */
