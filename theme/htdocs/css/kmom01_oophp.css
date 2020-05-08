@@ -5371,6 +5371,10 @@ hr::after {
   padding: 0 0.25em;
   background-color: #fff;
 }
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
 /**
 * Import the vertical grid.
 */
