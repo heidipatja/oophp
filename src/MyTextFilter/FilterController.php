@@ -92,11 +92,23 @@ class FilterController implements AppInjectableInterface
      */
     public function clickableActionGet() : object
     {
-        $title = "Klickbara länkar";
+        $title = "Clickable";
         $page = $this->app->page;
 
+        $linkfilter = new MyTextFilter();
+
+        $text = file_get_contents(__DIR__ . "../../../htdocs/text/clickable.txt");
+        $filter = ["link"];
+
+        $html = $linkfilter->parse($text, $filter);
+
+        $data = [
+            "text" => $text,
+            "html" => $html,
+        ];
+
         $page->add("filter/header");
-        $page->add("filter/clickable");
+        $page->add("filter/clickable", $data);
 
         return $page->render([
             "title" => $title
