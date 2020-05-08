@@ -9,7 +9,3 @@ namespace Anax\View;
 ?>
 
 <h1>Textfilter</h1>
-
-<p></p>
-
-<p></p>

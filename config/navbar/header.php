@@ -74,6 +74,11 @@ return [
             "title" => "Använd textfilter",
         ],
         [
+            "text" => "Innehåll",
+            "url" => "content",
+            "title" => "Hantera innehåll",
+        ],
+        [
             "text" => "Spel",
             "url" => "spel",
             "title" => "Spela spel",
