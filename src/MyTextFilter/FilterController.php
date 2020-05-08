@@ -6,9 +6,8 @@ use Anax\Commons\AppInjectableInterface;
 use Anax\Commons\AppInjectableTrait;
 
 /**
- * Controller for Movie database
+ * Controller for text filters
  */
-/** * @SuppressWarnings(PHPMD.TooManyPublicMethods) * @return bool */
 class FilterController implements AppInjectableInterface
 {
     use AppInjectableTrait;
@@ -75,8 +74,20 @@ class FilterController implements AppInjectableInterface
         $title = "Markdown";
         $page = $this->app->page;
 
+        $mdfilter = new MyTextFilter();
+
+        $text = file_get_contents(__DIR__ . "../../../htdocs/text/sample.md");
+        $filter = ["markdown"];
+
+        $html = $mdfilter->parse($text, $filter);
+
+        $data = [
+            "text" => $text,
+            "html" => $html,
+        ];
+
         $page->add("filter/header");
-        $page->add("filter/markdown");
+        $page->add("filter/markdown", $data);
 
         return $page->render([
             "title" => $title

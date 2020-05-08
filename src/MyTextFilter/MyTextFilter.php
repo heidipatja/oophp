@@ -2,11 +2,14 @@
 
 namespace Hepa19\MyTextFilter;
 
+use Michelf\MarkdownExtra;
+
 /**
  * Filter and format text content.
  *
  * @SuppressWarnings(PHPMD.UnusedFormalParameter)
  * @SuppressWarnings(PHPMD.UnusedPrivateField)
+ * @SuppressWarnings(PHPMD.UnusedLocalVariable)
  */
 class MyTextFilter
 {
