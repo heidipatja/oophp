@@ -63,10 +63,15 @@ return [
             "url" => "om",
             "title" => "Om denna webbplats.",
         ],
+        // [
+        //     "text" => "Styleväljare",
+        //     "url" => "style",
+        //     "title" => "Välj stylesheet.",
+        // ],
         [
-            "text" => "Styleväljare",
-            "url" => "style",
-            "title" => "Välj stylesheet.",
+            "text" => "Textfilter",
+            "url" => "filter",
+            "title" => "Använd textfilter",
         ],
         [
             "text" => "Spel",
