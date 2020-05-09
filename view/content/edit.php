@@ -1,48 +1,45 @@
+<?php
+
+namespace Anax\View;
+
+/**
+ * Edit
+ */
+
+?>
+
+<h1>Redigera</h1>
+
 <form method="post">
-    <fieldset>
-    <legend>Edit</legend>
     <input type="hidden" name="contentId" value="<?= esc($content->id) ?>"/>
 
-    <p>
-        <label>Title:<br> 
+        <label for "contentTitle">Titel:</label>
         <input type="text" name="contentTitle" value="<?= esc($content->title) ?>"/>
         </label>
-    </p>
 
-    <p>
-        <label>Path:<br> 
+        <label for "contentPath">Path:</label>
         <input type="text" name="contentPath" value="<?= esc($content->path) ?>"/>
-    </p>
 
-    <p>
-        <label>Slug:<br> 
+        <label for "contentSlug">Slug:</label>
         <input type="text" name="contentSlug" value="<?= esc($content->slug) ?>"/>
-    </p>
 
-    <p>
-        <label>Text:<br> 
+        <label for "contentData">Text:</label>
         <textarea name="contentData"><?= esc($content->data) ?></textarea>
-     </p>
 
-     <p>
-         <label>Type:<br> 
-         <input type="text" name="contentType" value="<?= esc($content->type) ?>"/>
-     </p>
+        <label for "contentType">Typ:</label>
+        <input type="text" name="contentType" value="<?= esc($content->type) ?>"/>
 
-     <p>
-         <label>Filter:<br> 
-         <input type="text" name="contentFilter" value="<?= esc($content->filter) ?>"/>
-     </p>
+        <label for "contentFilter">Filter:</label>
+        <input type="text" name="contentFilter" value="<?= esc($content->filter) ?>"/>
 
-     <p>
-         <label>Publish:<br> 
-         <input type="datetime" name="contentPublish" value="<?= esc($content->published) ?>"/>
-     </p>
+        <label for "contentPublish">Publicera:</label>
+        <input type="datetime" name="contentPublish" value="<?= esc($content->published) ?>"/>
 
-    <p>
-        <button type="submit" name="doSave"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
-        <button type="reset"><i class="fa fa-undo" aria-hidden="true"></i> Reset</button>
-        <button type="submit" name="doDelete"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-    </p>
+        <br>
+
+        <input type="submit" class="save" name="doSave" value="Spara">
+        <input type="reset" class="reset" value="Återställ">
+        <input type="submit" class="delete" name="doDelete" value="Radera">
+
     </fieldset>
 </form>

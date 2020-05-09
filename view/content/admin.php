@@ -1,19 +1,32 @@
 <?php
+
+namespace Anax\View;
+
+/**
+ * Admin page
+ */
+
+
 if (!$resultset) {
     return;
 }
 ?>
 
+<h1>Admin</h1>
+
+<a class="reset button" href="reset">Återställ</a>
+<a class="create button" href="create">Skapa</a>
+
 <table>
     <tr class="first">
         <th>Id</th>
-        <th>Title</th>
-        <th>Type</th>
-        <th>Published</th>
-        <th>Created</th>
-        <th>Updated</th>
-        <th>Deleted</th>
-        <th>Actions</th>
+        <th>Titel</th>
+        <th>Typ</th>
+        <th>Publicerad</th>
+        <th>Skapad</th>
+        <th>Uppdaterad</th>
+        <th>Raderad</th>
+        <th>Åtgärder</th>
     </tr>
 <?php $id = -1; foreach ($resultset as $row) :
     $id++; ?>
@@ -26,12 +39,8 @@ if (!$resultset) {
         <td><?= $row->updated ?></td>
         <td><?= $row->deleted ?></td>
         <td>
-            <a class="icons" href="?route=edit&amp;id=<?= $row->id ?>" title="Edit this content">
-                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-            </a>
-            <a class="icons" href="?route=delete&amp;id=<?= $row->id ?>" title="Edit this content">
-                <i class="fa fa-trash-o" aria-hidden="true"></i>
-            </a>
+            <a class="button edit" href="edit?id=<?= $row->id ?>"><i class="fas fa-edit"></i></a>
+            <a class="button delete" href="delete?id=<?= $row->id ?>"><i class="fas fa-trash"></i></a>
         </td>
     </tr>
 <?php endforeach; ?>

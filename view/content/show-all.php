@@ -1,4 +1,12 @@
 <?php
+
+namespace Anax\View;
+
+/**
+ * Show all pages and posts
+ */
+
+
 if (!$resultset) {
     return;
 }
@@ -6,14 +14,14 @@ if (!$resultset) {
 
 <table>
     <tr class="first">
-        <th>Rad</th>
         <th>Id</th>
-        <th>Title</th>
-        <th>Type</th>
-        <th>Published</th>
-        <th>Created</th>
-        <th>Updated</th>
-        <th>Deleted</th>
+        <th>Titel</th>
+        <th>Typ</th>
+        <th>Publicerad</th>
+        <th>Skapad</th>
+        <th>Uppdaterad</th>
+        <th>Raderad</th>
+        <th>Åtgärder</th>
     </tr>
 <?php $id = -1; foreach ($resultset as $row) :
     $id++; ?>

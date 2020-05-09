@@ -1,17 +1,23 @@
+<?php
+
+namespace Anax\View;
+
+/**
+ * Delelte page/blog post
+ */
+
+?>
+
+<h1>Radera</h1>
+
 <form method="post">
-    <fieldset>
-    <legend>Delete</legend>
 
     <input type="hidden" name="contentId" value="<?= esc($content->id) ?>"/>
 
-    <p>
-        <label>Title:<br> 
-            <input type="text" name="contentTitle" value="<?= esc($content->title) ?>" readonly/>
-        </label>
-    </p>
+    <label for "contentTitle">Titel:</label>
+        <input type="text" name="contentTitle" value="<?= esc($content->title) ?>" readonly/>
 
-    <p>
-        <button type="submit" name="doDelete"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-    </p>
-    </fieldset>
+    <br>
+    <input type="submit" name="doDelete" class="delete" value="Radera">
+
 </form>

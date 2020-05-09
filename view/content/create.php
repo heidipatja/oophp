@@ -1,16 +1,23 @@
+<?php
+
+namespace Anax\View;
+
+/**
+ * Create new
+ */
+
+?>
+
+<h1>Skapa</h1>
+
 <form method="post">
-    <fieldset>
-    <legend>Create</legend>
 
-    <p>
-        <label>Title:<br> 
-        <input type="text" name="contentTitle" default="A Title"/>
-        </label>
-    </p>
+    <label for "contentTitle">Titel:</label>
+    <input type="text" name="contentTitle" value="A Title">
 
-    <p>
-        <button type="submit" name="doCreate"><i class="fa fa-plus" aria-hidden="true"></i> Create</button>
-        <button type="reset"><i class="fa fa-undo" aria-hidden="true"></i> Reset</button>
-    </p>
-    </fieldset>
+    <br>
+
+    <input type="submit" name="doCreate" class="save" value="Skapa">
+    <input type="reset" class="reset" value="Återställ">
+
 </form>

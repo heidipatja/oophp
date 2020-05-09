@@ -1,3 +1,13 @@
+<?php
+
+namespace Anax\View;
+
+/**
+ * Blog page
+ */
+
+?>
+
 <article>
     <header>
         <h1><?= esc($content->title) ?></h1>
