@@ -273,6 +273,7 @@ class ContentController implements AppInjectableInterface
         if ($doReset) {
             $filename = "/sql/content/setup.sql";
             $this->reset($filename);
+            $this->app->response->redirect("content/admin");
         }
 
         $page->add("content/header");

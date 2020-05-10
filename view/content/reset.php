@@ -12,6 +12,6 @@ namespace Anax\View;
 
 <p>Är du säker på att du vill återställa databasen?</p>
 
-<form method="get">
+<form class="content-form" method="get">
     <input type="submit" class="reset" name="reset" value="Ba gör det!">
 </form>

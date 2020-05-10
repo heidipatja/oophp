@@ -14,7 +14,7 @@ if (!$resultset) {
 
 <h1>Sidor</h1>
 
-<table>
+<table class="content-table">
     <tr class="first">
         <th>Id</th>
         <th>Titel</th>

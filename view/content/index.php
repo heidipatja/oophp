@@ -13,7 +13,7 @@ if (!$resultset) {
 
 <h1>Översikt</h1>
 
-<table>
+<table class="content-table">
     <tr class="first">
         <th>Id</th>
         <th>Titel</th>

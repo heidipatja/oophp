@@ -12,7 +12,7 @@ if (!$resultset) {
 }
 ?>
 
-<table>
+<table class="content-table">
     <tr class="first">
         <th>Id</th>
         <th>Titel</th>

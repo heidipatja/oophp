@@ -17,7 +17,7 @@ if (!$resultset) {
 <a class="reset button" href="reset">Återställ</a>
 <a class="create button" href="create">Skapa</a>
 
-<table>
+<table class="content-table">
     <tr class="first">
         <th>Id</th>
         <th>Titel</th>
@@ -39,8 +39,8 @@ if (!$resultset) {
         <td><?= $row->updated ?></td>
         <td><?= $row->deleted ?></td>
         <td>
-            <a class="button edit" href="edit?id=<?= $row->id ?>"><i class="fas fa-edit"></i></a>
-            <a class="button delete" href="delete?id=<?= $row->id ?>"><i class="fas fa-trash"></i></a>
+            <a href="edit?id=<?= $row->id ?>"><i class="fas fa-edit"></i></a>
+            <a href="delete?id=<?= $row->id ?>"><i class="fas fa-trash"></i></a>
         </td>
     </tr>
 <?php endforeach; ?>

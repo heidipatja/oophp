@@ -10,7 +10,7 @@ namespace Anax\View;
 
 <h1>Skapa</h1>
 
-<form method="post">
+<form class="content-form" method="post">
 
     <label for "contentTitle">Titel:</label>
     <input type="text" name="contentTitle" value="A Title">

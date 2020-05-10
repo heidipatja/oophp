@@ -10,7 +10,7 @@ namespace Anax\View;
 
 <h1>Redigera</h1>
 
-<form method="post">
+<form class="content-form" method="post">
     <input type="hidden" name="contentId" value="<?= esc($content->id) ?>"/>
 
         <label for "contentTitle">Titel:</label>

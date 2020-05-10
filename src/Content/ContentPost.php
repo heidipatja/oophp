@@ -18,66 +18,66 @@ class ContentPost
       */
       private $db;
 
-     /**
-      * Construct content class
-      *
-      * @return object
-      */
-      public function __construct($db)
-      {
-          $this->db = $db;
-          $this->db->connect();
-      }
+    /**
+     * Construct content class
+     *
+     * @return object
+     */
+    public function __construct($db)
+    {
+        $this->db = $db;
+        $this->db->connect();
+    }
 
-     /**
-      * Get all blog posts from table
-      *
-      * @return array $resultset Array with blog posts
-      */
-     public function getAllPosts() : array
-     {
-         $sql = "
-         SELECT
-         *,
-         DATE_FORMAT(COALESCE(updated, published), '%Y-%m-%dT%TZ') AS published_iso8601,
-         DATE_FORMAT(COALESCE(updated, published), '%Y-%m-%d') AS published
-         FROM content
-         WHERE type=?
-         ORDER BY published DESC
-         ;";
+    /**
+     * Get all blog posts from table
+     *
+     * @return array $resultset Array with blog posts
+    */
+    public function getAllPosts() : array
+    {
+        $sql = "
+        SELECT
+        *,
+        DATE_FORMAT(COALESCE(updated, published), '%Y-%m-%dT%TZ') AS published_iso8601,
+        DATE_FORMAT(COALESCE(updated, published), '%Y-%m-%d') AS published
+        FROM content
+        WHERE type=?
+        ORDER BY published DESC
+        ;";
 
-         $resultset = $this->db->executeFetchAll($sql, ["post"]);
+        $resultset = $this->db->executeFetchAll($sql, ["post"]);
 
-         return $resultset;
-     }
+        return $resultset;
+    }
 
 
 
-     /**
-      * Get one post by id
-      *
-      * @return object $content One blog post
-      */
-     public function getOnePost($slug) : object
-     {
-         $sql = "
-         SELECT
-             *,
-             DATE_FORMAT(COALESCE(updated, published), '%Y-%m-%dT%TZ') AS published_iso8601,
-             DATE_FORMAT(COALESCE(updated, published), '%Y-%m-%d') AS published
-         FROM content
-         WHERE
-             slug = ?
-             AND type = ?
-             AND (deleted IS NULL OR deleted > NOW())
-             AND published <= NOW()
-         ORDER BY published DESC
-         ;";
+    /**
+     * Get one post by id
+     *
+     * @return object $content One blog post
+     */
+    public function getOnePost($slug) : object
+    {
+        $sql = "
+        SELECT
+            *,
+            DATE_FORMAT(COALESCE(updated, published), '%Y-%m-%dT%TZ') AS published_iso8601,
+            DATE_FORMAT(COALESCE(updated, published), '%Y-%m-%d') AS published
+        FROM content
+        WHERE
+            slug = ?
+            AND type = ?
+            AND (deleted IS NULL OR deleted > NOW())
+            AND published <= NOW()
+        ORDER BY published DESC
+        ;";
 
-         $content = $this->db->executeFetch($sql, [$slug, "post"]);
+        $content = $this->db->executeFetch($sql, [$slug, "post"]);
 
-         $content = $this->filter($content);
+        $content = $this->filter($content);
 
-         return $content;
-     }
+        return $content;
+    }
 }
