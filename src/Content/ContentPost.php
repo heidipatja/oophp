@@ -48,6 +48,10 @@ class ContentPost
 
         $resultset = $this->db->executeFetchAll($sql, ["post"]);
 
+        foreach ($resultset as $res) {
+            $res = $this->filter($res);
+        }
+
         return $resultset;
     }
 
