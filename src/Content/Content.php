@@ -99,8 +99,10 @@ class Content
     public function saveContent($params)
     {
         if (!$params["contentSlug"]) {
-            $params["contentSlug"] = slugify($params["contentTitle"]);
+            $params["contentSlug"] = $this->slugify($params["contentTitle"]);
         }
+
+        $params = $this->uniqueSlug($params);
 
         if (!$params["contentPath"]) {
             $params["contentPath"] = null;
@@ -121,28 +123,5 @@ class Content
     {
         $sql = "UPDATE content SET deleted=NOW() WHERE id=?;";
         $this->db->execute($sql, [$contentId]);
-    }
-
-
-
-
-    /**
-     * Check if slug already exists
-     *
-     * @param string $str slug to check
-     *
-     * @return bool
-     */
-    function isSlug($slug, $id) : bool
-    {
-        $isSlug = false;
-        $sql = "SELECT slug, id FROM content WHERE slug = ? AND id NOT ?;";
-        $result = $this->db->executeFetch($sql, [$slug, $id]);
-
-        if ($result) {
-            $isSlug = true;
-        }
-
-        return $isSlug;
     }
 }

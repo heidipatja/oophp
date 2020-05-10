@@ -7,7 +7,7 @@ namespace Hepa19\Content;
  */
 
 /**
- * Reset content database
+ * Content trait
  *
  * @return void
  */
@@ -28,6 +28,27 @@ trait ContentTrait
         $str = preg_replace('/[^a-z0-9-]/', '-', $str);
         $str = trim(preg_replace('/-+/', '-', $str), '-');
         return $str;
+    }
+
+
+
+    /**
+     * Check if slug already exists
+     *
+     * @param object $params
+     *
+     * @return array $params
+     */
+    function uniqueSlug($params) : array
+    {
+        $sql = "SELECT slug, id FROM content WHERE slug = ? AND id = ?;";
+        $result = $this->db->executeFetch($sql, [$params["contentSlug"], $params["contentId"]]);
+
+        if (!$result) {
+            $params["contentSlug"] = $params["contentSlug"] . $params["contentId"];
+        }
+
+        return $params;
     }
 
 

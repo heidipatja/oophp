@@ -6,7 +6,6 @@ namespace Anax\View;
  * Pages
  */
 
-var_dump($resultset);
 
 if (!$resultset) {
     return;
