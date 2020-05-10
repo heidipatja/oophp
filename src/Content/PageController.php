@@ -15,7 +15,7 @@ class PageController implements AppInjectableInterface
     /**
      * @var ContentPage $contentpage object handling content pages
      */
-     private $contentpage;
+    private $contentpage;
 
 
     /**
@@ -62,7 +62,6 @@ class PageController implements AppInjectableInterface
     public function pageActionGet() : object
     {
         $path = getGet("path");
-        $slug = getGet("slug");
         $page = $this->app->page;
 
         $content = $this->contentpage->getOnePage($path);

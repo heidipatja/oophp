@@ -17,7 +17,7 @@ class PostController implements AppInjectableInterface
     /**
      * @var ContentPost $contentpost object handling content pages
      */
-     private $contentpost;
+    private $contentpost;
 
     /**
      * Connect to database

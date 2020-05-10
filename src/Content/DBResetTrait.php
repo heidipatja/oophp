@@ -12,8 +12,8 @@ trait DBResetTrait
     /**
     * Reset database
     */
-    public function reset($filename) {
-
+    public function reset($filename)
+    {
         $file = ANAX_INSTALL_PATH . $filename;
 
         if ($_SERVER["SERVER_NAME"] === "www.student.bth.se") {

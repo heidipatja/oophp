@@ -9,6 +9,7 @@ use Hepa19\Content\DBResetTrait;
 /**
  * Controller for content
  */
+/** * @SuppressWarnings(PHPMD.TooManyPublicMethods) * @return bool */
 class ContentController implements AppInjectableInterface
 {
     use AppInjectableTrait;
@@ -17,7 +18,7 @@ class ContentController implements AppInjectableInterface
     /**
      * @var Content Content object handling content
      */
-     private $content;
+    private $content;
 
     /**
      * Connect to database
@@ -91,7 +92,6 @@ class ContentController implements AppInjectableInterface
     public function createActionGet() : object
     {
         $page = $this->app->page;
-        $db = $this->app->db;
 
         $title = "Nytt inlägg";
 
@@ -112,9 +112,6 @@ class ContentController implements AppInjectableInterface
      */
     public function createActionPost()
     {
-        $db = $this->app->db;
-        $request = $this->app->request;
-
         if (hasKeyPost("doCreate")) {
             $title = getPostContent("contentTitle");
 
@@ -179,7 +176,6 @@ class ContentController implements AppInjectableInterface
             $this->content->saveContent($params);
 
             return $this->app->response->redirect("content/admin");
-
         } elseif (hasKeyPost("doDelete")) {
             return $this->app->response->redirect("content/delete?id=$contentId");
         } else {

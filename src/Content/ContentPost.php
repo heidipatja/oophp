@@ -13,16 +13,16 @@ class ContentPost
 {
     use ContentTrait;
 
-     /**
-      * @var $db database connection
-      */
-      private $db;
+    /**
+    * @var $db database connection
+    */
+    private $db;
 
     /**
-     * Construct content class
-     *
-     * @return object
-     */
+    * Construct content class
+    *
+    * @return object
+    */
     public function __construct($db)
     {
         $this->db = $db;

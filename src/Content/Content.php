@@ -16,18 +16,18 @@ class Content
     /**
      * @var $db database connection
      */
-     private $db;
+    private $db;
 
     /**
      * Construct content class
      *
      * @return object
-     */
-     public function __construct($db)
-     {
-         $this->db = $db;
-         $this->db->connect();
-     }
+    */
+    public function __construct($db)
+    {
+        $this->db = $db;
+        $this->db->connect();
+    }
 
 
 

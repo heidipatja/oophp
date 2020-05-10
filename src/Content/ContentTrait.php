@@ -20,7 +20,7 @@ trait ContentTrait
      *
      * @return str the formatted slug.
      */
-    function slugify($str)
+    public function slugify($str)
     {
         $str = mb_strtolower(trim($str));
         $str = str_replace(['å','ä'], 'a', $str);
@@ -39,7 +39,7 @@ trait ContentTrait
      *
      * @return array $params
      */
-    function uniqueSlug($params) : array
+    public function uniqueSlug($params) : array
     {
         $sql = "SELECT slug, id FROM content WHERE slug = ? AND id = ?;";
         $result = $this->db->executeFetch($sql, [$params["contentSlug"], $params["contentId"]]);
@@ -60,7 +60,7 @@ trait ContentTrait
      *
      * @return array formatted text
      */
-    function filter($content)
+    public function filter($content)
     {
         $filter = new \Hepa19\MyTextFilter\MyTextFilter();
 
