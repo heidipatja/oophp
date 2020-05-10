@@ -4,12 +4,15 @@ namespace Hepa19\Content;
 
 use Anax\Commons\AppInjectableInterface;
 use Anax\Commons\AppInjectableTrait;
+use Hepa19\Content\ContentTrait;
 
 /**
  * Class for content blog posts
  */
 class ContentPost
 {
+    use ContentTrait;
+
      /**
       * @var $db database connection
       */
@@ -72,6 +75,8 @@ class ContentPost
          ;";
 
          $content = $this->db->executeFetch($sql, [$slug, "post"]);
+
+         $content = $this->filter($content);
 
          return $content;
      }

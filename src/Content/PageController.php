@@ -4,7 +4,6 @@ namespace Hepa19\Content;
 
 use Anax\Commons\AppInjectableInterface;
 use Anax\Commons\AppInjectableTrait;
-use Hepa19\Content\ContentTrait;
 
 /**
  * Controller for content
@@ -12,7 +11,6 @@ use Hepa19\Content\ContentTrait;
 class PageController implements AppInjectableInterface
 {
     use AppInjectableTrait;
-    use ContentTrait;
 
     /**
      * @var ContentPage $contentpage object handling content pages
@@ -73,8 +71,6 @@ class PageController implements AppInjectableInterface
         }
 
         $title = $content->title;
-        $content = $this->filter($content);
-
         $data = [
             "content" => $content
         ];

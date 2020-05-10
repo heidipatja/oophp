@@ -75,8 +75,6 @@ class PostController implements AppInjectableInterface
 
         $title = $content->title;
 
-        $content = $this->filter($content);
-
         $data = [
             "content" => $content
         ];

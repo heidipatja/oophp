@@ -4,12 +4,14 @@ namespace Hepa19\Content;
 
 use Anax\Commons\AppInjectableInterface;
 use Anax\Commons\AppInjectableTrait;
+use Hepa19\Content\ContentTrait;
 
 /**
  * Class for content pages
  */
 class ContentPage
 {
+    use ContentTrait;
     /**
      * @var $db database connection
      */
@@ -74,6 +76,8 @@ class ContentPage
          ;";
 
          $content = $this->db->executeFetch($sql, [$route, "page"]);
+
+         $content = $this->filter($content);
 
          return $content;
      }
