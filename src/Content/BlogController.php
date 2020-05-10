@@ -4,6 +4,7 @@ namespace Hepa19\Content;
 
 use Anax\Commons\AppInjectableInterface;
 use Anax\Commons\AppInjectableTrait;
+use Hepa19\Content\ContentTrait;
 
 /**
  * Controller for content
@@ -11,6 +12,7 @@ use Anax\Commons\AppInjectableTrait;
 class BlogController implements AppInjectableInterface
 {
     use AppInjectableTrait;
+    use ContentTrait;
 
     /**
      * Connect to database
@@ -71,9 +73,6 @@ class BlogController implements AppInjectableInterface
         $page = $this->app->page;
         $db = $this->app->db;
 
-        var_dump($slug);
-
-
         $sql = <<<EOD
         SELECT
             *,
@@ -96,6 +95,8 @@ class BlogController implements AppInjectableInterface
         }
 
         $title = $content->title;
+
+        $content = $this->filter($content);
 
         $data = [
             "content" => $content

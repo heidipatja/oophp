@@ -90,6 +90,10 @@ class PageController implements AppInjectableInterface
 
         $content = $db->executeFetch($sql, [$route, "page"]);
 
+        if (!$content) {
+            return $this->app->response->redirect("content/pageNotFound");
+        }
+
         $title = $content->title;
 
         $content = $this->filter($content);

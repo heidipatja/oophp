@@ -15,6 +15,11 @@ class ContentController implements AppInjectableInterface
     use DBResetTrait;
 
     /**
+     * @var Content Content object handling content
+     */
+     private $content;
+
+    /**
      * Connect to database
      *
      * @return object
@@ -22,6 +27,7 @@ class ContentController implements AppInjectableInterface
     public function initialize()
     {
         $this->app->db->connect();
+        $this->content = new Content($this->app->db);
     }
 
 
@@ -34,11 +40,8 @@ class ContentController implements AppInjectableInterface
     {
         $title = "Översikt över innehållet";
         $page = $this->app->page;
-        $db = $this->app->db;
 
-        $sql = "SELECT * FROM content;";
-
-        $resultset = $db->executeFetchAll($sql);
+        $resultset = $this->content->getAllContent();
 
         $data = [
             "resultset" => $resultset
@@ -63,11 +66,8 @@ class ContentController implements AppInjectableInterface
     {
         $title = "Admin";
         $page = $this->app->page;
-        $db = $this->app->db;
 
-        $sql = "SELECT * FROM content;";
-
-        $resultset = $db->executeFetchAll($sql);
+        $resultset = $this->content->getAllContent();
 
         $data = [
             "resultset" => $resultset
@@ -118,13 +118,10 @@ class ContentController implements AppInjectableInterface
         if (hasKeyPost("doCreate")) {
             $title = getPostContent("contentTitle");
 
-            $sql = "INSERT INTO content (title) VALUES (?);";
-            $db->execute($sql, [$title]);
-            $id = $db->lastInsertId();
+            $id = $this->content->createContent($title);
 
             return $this->app->response->redirect("content/edit?id=$id");
         }
-        // return $this->app->response->redirect("content/index");
     }
 
 
@@ -137,15 +134,12 @@ class ContentController implements AppInjectableInterface
     public function editAction()
     {
         $page = $this->app->page;
-        $db = $this->app->db;
 
         $title = "Redigera";
 
         $contentId = getPostContent("contentId") ?: getGet("id");
 
-        $sql = "SELECT * FROM content WHERE id = ?;";
-
-        $content = $db->executeFetch($sql, [$contentId]);
+        $content = $this->content->editContent($contentId);
 
         $data = [
             "content" => $content
@@ -168,10 +162,7 @@ class ContentController implements AppInjectableInterface
      */
     public function editActionPost()
     {
-        $contentId = getPostContent("contentId");
-        $db = $this->app->db;
-
-        $contentId = getPost("contentId") ?: getGet("id");
+        $contentId = getPostContent("contentId") ?: getGet("id");
 
         if (hasKeyPost("doSave")) {
             $params = getPostContent([
@@ -185,21 +176,12 @@ class ContentController implements AppInjectableInterface
                 "contentId"
             ]);
 
-            if (!$params["contentSlug"]) {
-                $params["contentSlug"] = slugify($params["contentTitle"]);
-            }
-
-            if (!$params["contentPath"]) {
-                $params["contentPath"] = null;
-            }
-
-            $sql = "UPDATE content SET title=?, path=?, slug=?, data=?, type=?, filter=?, published=? WHERE id = ?;";
-            $db->execute($sql, array_values($params));
+            $this->content->saveContent($params);
 
             return $this->app->response->redirect("content/admin");
 
         } elseif (hasKeyPost("doDelete")) {
-            return $this->app->response->redirect("content/edit?id=$contentId");
+            return $this->app->response->redirect("content/delete?id=$contentId");
         } else {
             return $this->app->response->redirect("content/edit?contentId=$contentId");
         }
@@ -215,15 +197,10 @@ class ContentController implements AppInjectableInterface
     public function deleteActionGet()
     {
         $page = $this->app->page;
-        $db = $this->app->db;
-
         $title = "Radera";
 
         $contentId = getGet("id");
-
-        $sql = "SELECT * FROM content WHERE id = ?;";
-
-        $content = $db->executeFetch($sql, [$contentId]);
+        $content = $this->content->getOneContent($contentId);
 
         $data = [
             "content" => $content
@@ -246,16 +223,13 @@ class ContentController implements AppInjectableInterface
      */
     public function deleteActionPost()
     {
-        $db = $this->app->db;
         $contentId = getPostContent("contentId");
 
         if (!is_numeric($contentId)) {
-            die("Not valid for content id.");
+            $this->app->response->redirect("content/pageNotFound");
         }
 
-        $contentId = getPostContent("contentId");
-        $sql = "UPDATE content SET deleted=NOW() WHERE id=?;";
-        $db->execute($sql, [$contentId]);
+        $this->content->deleteContent($contentId);
 
         $this->app->response->redirect("content/admin");
     }
@@ -285,7 +259,7 @@ class ContentController implements AppInjectableInterface
 
     /**
      *
-     * 404 page not found
+     * Reset database
      *
      * @return object
      */
