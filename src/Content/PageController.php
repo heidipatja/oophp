@@ -15,6 +15,12 @@ class PageController implements AppInjectableInterface
     use ContentTrait;
 
     /**
+     * @var ContentPage $contentpage object handling content pages
+     */
+     private $contentpage;
+
+
+    /**
      * Connect to database
      *
      * @return object
@@ -22,6 +28,7 @@ class PageController implements AppInjectableInterface
     public function initialize()
     {
         $this->app->db->connect();
+        $this->contentpage = new ContentPage($this->app->db);
     }
 
 
@@ -34,22 +41,8 @@ class PageController implements AppInjectableInterface
     {
         $title = "Alla sidor";
         $page = $this->app->page;
-        $db = $this->app->db;
 
-        $sql = <<<EOD
-        SELECT
-        *,
-        CASE
-        WHEN (deleted <= NOW()) THEN "isDeleted"
-        WHEN (published <= NOW()) THEN "isPublished"
-        ELSE "notPublished"
-        END AS status
-        FROM content
-        WHERE type=?
-        ;
-        EOD;
-
-        $resultset = $db->executeFetchAll($sql, ["page"]);
+        $resultset = $this->contentpage->getAllPages();
 
         $data = [
             "resultset" => $resultset
@@ -72,30 +65,14 @@ class PageController implements AppInjectableInterface
     {
         $route = getGet("route");
         $page = $this->app->page;
-        $db = $this->app->db;
 
-        $sql = <<<EOD
-            SELECT
-            *,
-            DATE_FORMAT(COALESCE(updated, published), '%Y-%m-%dT%TZ') AS modified_iso8601,
-            DATE_FORMAT(COALESCE(updated, published), '%Y-%m-%d') AS modified
-            FROM content
-            WHERE
-            path = ?
-            AND type = ?
-            AND (deleted IS NULL OR deleted > NOW())
-            AND published <= NOW()
-            ;
-            EOD;
-
-        $content = $db->executeFetch($sql, [$route, "page"]);
+        $content = $this->contentpage->getOnePage($route);
 
         if (!$content) {
             return $this->app->response->redirect("content/pageNotFound");
         }
 
         $title = $content->title;
-
         $content = $this->filter($content);
 
         $data = [

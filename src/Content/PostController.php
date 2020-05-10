@@ -9,10 +9,15 @@ use Hepa19\Content\ContentTrait;
 /**
  * Controller for content
  */
-class BlogController implements AppInjectableInterface
+class PostController implements AppInjectableInterface
 {
     use AppInjectableTrait;
     use ContentTrait;
+
+    /**
+     * @var ContentPost $contentpost object handling content pages
+     */
+     private $contentpost;
 
     /**
      * Connect to database
@@ -22,6 +27,7 @@ class BlogController implements AppInjectableInterface
     public function initialize()
     {
         $this->app->db->connect();
+        $this->contentpost = new ContentPost($this->app->db);
     }
 
 
@@ -34,19 +40,8 @@ class BlogController implements AppInjectableInterface
     {
         $title = "Alla sidor";
         $page = $this->app->page;
-        $db = $this->app->db;
 
-        $sql = <<<EOD
-        SELECT
-        *,
-        DATE_FORMAT(COALESCE(updated, published), '%Y-%m-%dT%TZ') AS published_iso8601,
-        DATE_FORMAT(COALESCE(updated, published), '%Y-%m-%d') AS published
-        FROM content
-        WHERE type=?
-        ORDER BY published DESC
-        ;
-        EOD;
-        $resultset = $db->executeFetchAll($sql, ["post"]);
+        $resultset = $this->contentpost->getAllPosts();
 
         $data = [
             "resultset" => $resultset
@@ -71,24 +66,8 @@ class BlogController implements AppInjectableInterface
     {
         $slug = getGet("slug");
         $page = $this->app->page;
-        $db = $this->app->db;
 
-        $sql = <<<EOD
-        SELECT
-            *,
-            DATE_FORMAT(COALESCE(updated, published), '%Y-%m-%dT%TZ') AS published_iso8601,
-            DATE_FORMAT(COALESCE(updated, published), '%Y-%m-%d') AS published
-        FROM content
-        WHERE
-            slug = ?
-            AND type = ?
-            AND (deleted IS NULL OR deleted > NOW())
-            AND published <= NOW()
-        ORDER BY published DESC
-        ;
-        EOD;
-
-        $content = $db->executeFetch($sql, [$slug, "post"]);
+        $content = $this->contentpost->getOnePost($slug);
 
         if (!$content) {
             return $this->app->response->redirect("content/pageNotFound");

@@ -5,9 +5,9 @@
 return [
     "routes" => [
         [
-            "info" => "BlogController",
+            "info" => "PostController",
             "mount" => "content/blog",
-            "handler" => "\Hepa19\Content\BlogController",
+            "handler" => "\Hepa19\Content\PostController",
         ],
     ]
 ];
