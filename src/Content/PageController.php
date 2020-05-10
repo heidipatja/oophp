@@ -61,10 +61,11 @@ class PageController implements AppInjectableInterface
      */
     public function pageActionGet() : object
     {
-        $route = getGet("route");
+        $path = getGet("path");
+        $slug = getGet("slug");
         $page = $this->app->page;
 
-        $content = $this->contentpage->getOnePage($route);
+        $content = $this->contentpage->getOnePage($path);
 
         if (!$content) {
             return $this->app->response->redirect("content/pageNotFound");

@@ -4,12 +4,15 @@ namespace Hepa19\Content;
 
 use Anax\Commons\AppInjectableInterface;
 use Anax\Commons\AppInjectableTrait;
+use Hepa19\Content\ContentTrait;
 
 /**
  * General class for content posts
  */
 class Content
 {
+    use ContentTrait;
+
     /**
      * @var $db database connection
      */

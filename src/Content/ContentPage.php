@@ -46,6 +46,7 @@ class ContentPage
          END AS status
          FROM content
          WHERE type=?
+         AND path IS NOT NULL
          ;";
 
          $resultset = $this->db->executeFetchAll($sql, ["page"]);

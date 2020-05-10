@@ -6,6 +6,7 @@ namespace Anax\View;
  * Pages
  */
 
+var_dump($resultset);
 
 if (!$resultset) {
     return;
@@ -27,7 +28,7 @@ if (!$resultset) {
     $id++; ?>
     <tr>
         <td><?= $row->id ?></td>
-        <td><a href="pages/page?route=<?= $row->path ?>"><?= $row->title ?></a></td>
+        <td><a href="pages/page?path=<?= $row->path ?>"><?= $row->title ?></a></td>
         <td><?= $row->type ?></td>
         <td><?= $row->status ?></td>
         <td><?= $row->published ?></td>
